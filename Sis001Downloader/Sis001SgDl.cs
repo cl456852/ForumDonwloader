@@ -21,12 +21,8 @@ namespace Sis001Downloader
         public void Download(object obj)
         {
             AsynObj o = (AsynObj)obj;
-            MatchCollection mc = threadRegex.Matches(o.Content);
-            MatchCollection pathMc = nameRegex.Matches(o.Content);
-            List<String> pathList = new List<string>();
             string[] threads1 = o.Content.Split(new string[] { "版块主题" }, StringSplitOptions.RemoveEmptyEntries);
             string[] threads = threads1[1].Split(new string[] {  "normalthread_", "pages_btns" }, StringSplitOptions.RemoveEmptyEntries);
-            List<AsynObj> filterThreads = new List<AsynObj>();
             foreach(string thread in threads)
             {
                 if(thread.Contains("新窗口打开"))
