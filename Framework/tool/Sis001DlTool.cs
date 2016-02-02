@@ -157,11 +157,6 @@ namespace Framework.tool
                     reader = new StreamReader(stream);
                     stream.Position = 0;
                     string fileContent = reader.ReadToEnd();
-                    if (fileContent.Contains("We are sorry but this is pure flooding"))
-                    {
-                        Config1.Flooding();
-                        continue;
-                    }
                     stream.Position = 0;
                     fstream = new FileStream(name, FileMode.Create);
                     stream.CopyTo(fstream);

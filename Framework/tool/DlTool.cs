@@ -99,7 +99,7 @@ namespace Framework.tool
 
         public static void SaveFile(string content, string fileName)
         {
-            fileName = fileName.Replace("%20", "").Replace("%2C", "").Replace("%22","");
+            fileName = fileName.Replace("%20", "").Replace("%2C", "").Replace("%22","").Replace("*","");
             //实例化一个文件流--->与写入文件相关联
             FileStream fs = new FileStream(fileName, FileMode.Create);
             //实例化一个StreamWriter-->与fs相关联

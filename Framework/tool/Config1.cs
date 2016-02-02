@@ -85,25 +85,22 @@ namespace Framework.tool
         static object ob = new object();
         public static ManualResetEvent mre = new ManualResetEvent(true);
 
-        public static void Check()
-        {
-
-            Monitor.TryEnter(ob);
-            mre.Reset();
-            if (!checkConnection())
-                redail();
-            mre.Set();
-            Monitor.Exit(ob);
-        }
-
         public static void Flooding()
         {
 
             if (Monitor.TryEnter(ob))
             {
                 mre.Reset();
-                RouterRedail(0);
-                RouterRedail(1);
+                while (true)
+                {
+                    if (RouterRedail(0))
+                        break;
+                }
+                while (true)
+                {
+                    if (RouterRedail(1))
+                        break;
+                }
                 mre.Set();
                 Monitor.Exit(ob);
             }
@@ -237,35 +234,43 @@ namespace Framework.tool
         }
 
 
-        public static void RouterRedail(int param)
+        public static bool RouterRedail(int param)
         {
-            if (param == 0)
-                while (true)
-                {
-                    redailRouter(0);
-                    Console.WriteLine("disconnect");
-                    Thread.Sleep(5000);
-                    if (checkRouterStatus(5))
+            try
+            {
+                if (param == 0)
+                    while (true)
                     {
-                        Console.WriteLine("disconnect Check Successful");
-                        break;
-                    }
-                    Console.WriteLine("disconnect Check Fail");
+                        redailRouter(0);
+                        Console.WriteLine("disconnect");
+                        Thread.Sleep(5000);
+                        if (checkRouterStatus(5))
+                        {
+                            Console.WriteLine("disconnect Check Successful");
+                            break;
+                        }
+                        Console.WriteLine("disconnect Check Fail");
 
-                }
-            if (param == 1)
-                while (true)
-                {
-                    redailRouter(1);
-                    Console.WriteLine("connect");
-                    Thread.Sleep(10000);
-                    if (checkRouterStatus(2))
-                    {
-                        Console.WriteLine("connect Check Successful");
-                        break;
                     }
-                    Console.WriteLine("connect Check Fail");
-                }
+                if (param == 1)
+                    while (true)
+                    {
+                        redailRouter(1);
+                        Console.WriteLine("connect");
+                        Thread.Sleep(10000);
+                        if (checkRouterStatus(2))
+                        {
+                            Console.WriteLine("connect Check Successful");
+                            break;
+                        }
+                        Console.WriteLine("connect Check Fail");
+                    }
+            }catch(Exception e)
+            {
+                Console.WriteLine("路由器错误 " + e.Message);
+                return false;
+            }
+            return true;
         }
 
         public static bool checkRouterStatus(int status)

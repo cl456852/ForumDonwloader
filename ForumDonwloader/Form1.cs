@@ -16,6 +16,7 @@ using System.Collections;
 using System.IO;
 using RarbgDownloader;
 using Sis001Downloader;
+using JavBusDownloader;
 
 namespace ForumDonwloader
 {
@@ -24,6 +25,7 @@ namespace ForumDonwloader
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         string url=null;
@@ -33,9 +35,7 @@ namespace ForumDonwloader
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             init();
-
             DlConfig.storage.Clear();
             DirectoryInfo dinfo = new DirectoryInfo(textBox4.Text);
             FileInfo[] finfo= dinfo.GetFiles();
@@ -72,6 +72,16 @@ namespace ForumDonwloader
                 ThreadPool.QueueUserWorkItem(lpd.Download, new AsynObj(path, string.Format(url, i)));
             }
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            init();
+            IListPageDownloader lpd = new JavBusDl();
+            for (int i = start; i <= end; i++)
+            {
+                ThreadPool.QueueUserWorkItem(lpd.Download, new AsynObj(path, string.Format(url, i)));
+            }
         }
 
       
