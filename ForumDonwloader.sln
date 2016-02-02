@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sis001Downloader", "Sis001Downloader\Sis001Downloader.csproj", "{457B00CE-7F10-4434-B9F2-ABCAB82FE289}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavBusDownloader", "JavBusDownloader\JavBusDownloader.csproj", "{54498FDE-2A22-4920-98BE-039F72C79719}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,16 @@ Global
 		{457B00CE-7F10-4434-B9F2-ABCAB82FE289}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{457B00CE-7F10-4434-B9F2-ABCAB82FE289}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{457B00CE-7F10-4434-B9F2-ABCAB82FE289}.Release|x86.ActiveCfg = Release|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{54498FDE-2A22-4920-98BE-039F72C79719}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
