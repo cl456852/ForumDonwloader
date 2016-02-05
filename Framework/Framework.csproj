@@ -51,6 +51,7 @@
     <Compile Include="tool\AsynObj.cs" />
     <Compile Include="tool\Config1.cs" />
     <Compile Include="tool\DlTool.cs" />
+    <Compile Include="tool\DownloadParam.cs" />
     <Compile Include="tool\NewDlTool.cs" />
     <Compile Include="tool\Sis001DlTool.cs" />
   </ItemGroup>

@@ -11,6 +11,23 @@ namespace Framework.tool
 {
     public class Config1
     {
+        public const string EMPTY_URL = "https://www.akiba-online.com/forums/iv-torrents.172/page-2?order=post_date";
+
+
+        public static string InvalidPathFilter(string path)
+        {
+            char root = path[0];
+
+            path= path.Substring(2);
+            string invalid = new string(Path.GetInvalidPathChars()) + "*:?";
+
+            foreach (char c in invalid)
+            {
+                path = path.Replace(c.ToString(), "");
+            }
+            return root+":"+ path;
+        }
+
         static object txtLock = new object();
         public static void appendFile(string content, string path)
         {
