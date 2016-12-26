@@ -16,7 +16,7 @@ namespace AkibaOnlineDownloader
     public class AkibaOnlineSgDl : ISinglePageDonwloader
     {
         Regex threadRegex = new Regex("threads.* data-thumbnailurl");
-        Regex nameRegex = new Regex("<h1>.*</h1>");
+        Regex nameRegex = new Regex("<title>.*</title>");
         Regex torrentRegex = new Regex("<a href=\"attachments/.*/\" target=\"_blank\">");
         public void Download(object obj)
         {
@@ -39,8 +39,8 @@ namespace AkibaOnlineDownloader
                 HttpWebRequest downloadParam = (HttpWebRequest)WebRequest.Create(Config1.EMPTY_URL);
                 downloadParam.Host = "www.akiba-online.com";
                 string content = NewDlTool.GetHtml(asycObj.Url, true, downloadParam);
-                string name = nameRegex.Match(content).Value.Replace("<h1>", "").Replace("</h1>", "");
-                string path = Path.Combine(asycObj.Path, name + ".htm").Replace("/", "").Replace("|", "");
+                string name = nameRegex.Match(content).Value.Replace("<title>", "").Replace("</title>", "");
+                string path = Path.Combine(asycObj.Path, Config1.ValidePath( name) + ".htm");
                 MatchCollection mc = torrentRegex.Matches(content);
                 ArrayList list = new ArrayList();
                 foreach (Match match in mc)

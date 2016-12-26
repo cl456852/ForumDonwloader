@@ -19,11 +19,23 @@ namespace RarbgDownloader
             AsynObj o = (AsynObj)obj;
 
 
-            string content = DlTool.GetHtml(o.Url,DlConfig.useProxy);
-            if (content != "")
-            {
-                string[] contents = content.Split(new string[] { "<td align=\"center\">" }, StringSplitOptions.RemoveEmptyEntries);
-                content = contents[1];
+
+       
+                string content = DlTool.GetHtml(o.Url, DlConfig.useProxy);
+                if (content == "")
+                    return;
+                string[] contents = null;
+                try
+                {
+                    contents = content.Split(new string[] { "<td align=\"center\">" }, StringSplitOptions.RemoveEmptyEntries);
+                    content = contents[1];
+                }
+                catch
+                {
+                    Console.WriteLine("split error");
+                    Download(o);
+                }
+          
                 if (o.Path != null)
                 {
                     DlTool.SaveFile(content, Path.Combine(o.Path, o.Url.Replace('/', '_').Replace(":", "^").Replace("?", "wenhao")) + ".htm");
@@ -34,7 +46,7 @@ namespace RarbgDownloader
                 asynObj.Path = o.Path;
                 asynObj.Content = content;
                 ThreadPool.QueueUserWorkItem(sgDl.Download, asynObj);
-            }
+            
             
             
         }

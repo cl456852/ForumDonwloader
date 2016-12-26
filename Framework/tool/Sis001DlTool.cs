@@ -10,7 +10,8 @@ namespace Framework.tool
 {
     public class Sis001DlTool
     {
-        public static string GetHtml(string url, bool useProxy)
+        static Cookie cdb2_sid = new Cookie("cdb2_sid", "YLSfx3", "/", ".sis001.com");
+        public static string GetHtml(string url, bool useProxy, string encodingStr)
         {
             string str = string.Empty;
             bool success = false;
@@ -25,27 +26,26 @@ namespace Framework.tool
                 {
                     Config1.mre.WaitOne();
                     CookieContainer cookieContainer = new CookieContainer();
-                    Cookie vDVPaqSe = new Cookie("vDVPaqSe", "r9jSB2Wk", "/", "rarbg.to");
-                    Cookie lastVisit = new Cookie("LastVisit", Config1.getLastVisit(), "/", "rarbg.to");
-                    Cookie __utma = new Cookie("__utma", "9515318.860353583.1429342721.1449335760.1449670802.1", "/", ".rarbg.to");
-                    Cookie __utmb = new Cookie("__utmb", "9515318.23.10.1449670802", "/", ".rarbg.to");
-                    Cookie __utmc = new Cookie("__utmc", "9515318", "/", ".rarbg.to");
-                    Cookie __utmz = new Cookie("__utmz", "9515318.1447862416.86.2.utmcsr=rarbg.com|utmccn=(referral)|utmcmd=referral|utmcct=/download.php", "/", ".rarbg.to");
-                    Cookie __utmt = new Cookie("__utmt", "1", "/", ".rarbg.to");
-                    cookieContainer.Add(vDVPaqSe);
-                    cookieContainer.Add(lastVisit);
-                    // cookieContainer.Add(bSbTZF2j);
+                    Cookie __cfduid = new Cookie("__cfduid", "d388668d6cbc4666a3d0cc13e5c96ebb01450437129", "/", ".sis001.com");
+                    Cookie __utma = new Cookie("__utma", "55300009.1731467101.1450437133.1465127726.1466939474.32", "/", ".sis001.com");
+                    Cookie __utmb = new Cookie("__utmb", "55300009.14.10.1466939474", "/", ".sis001.com");
+                    Cookie __utmc = new Cookie("__utmc", "55300009", "/", ".sis001.com");
+                    Cookie __utmz = new Cookie("__utmc", "55300009.1450666650.9.2.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)", "/", ".sis001.com");
+                    Cookie cdb2_oldtopics = new Cookie("cdb2_oldtopics", "D9668619D9668602D9668995D", "/", ".sis001.com");
                     cookieContainer.Add(__utma);
                     cookieContainer.Add(__utmb);
                     cookieContainer.Add(__utmc);
                     cookieContainer.Add(__utmz);
-                    cookieContainer.Add(__utmt);
+                    cookieContainer.Add(cdb2_sid);
+                    cookieContainer.Add(__cfduid);
+                    cookieContainer.Add(cdb2_oldtopics);
                     request = (HttpWebRequest)WebRequest.Create(url);
                     request.CookieContainer = cookieContainer;
                     request.UserAgent = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36";
                     request.Timeout = 15000;
                     request.KeepAlive = false;
-                    request.Referer = "";
+                    request.Referer = "http://www.sis001.com/forum/forum-230-28.html";
+                    request.Host = "www.sis001.com";
                     //  request.SendChunked = true;
                     request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
                     //   request.TransferEncoding = "gzip,deflate,sdch";
@@ -57,10 +57,10 @@ namespace Framework.tool
                         request.Proxy = proxy;
                     }
                     response = (HttpWebResponse)request.GetResponse();
-                    if (response.Cookies["LastVisit"] != null)
-                        Config1.setLastVisit(response.Cookies["LastVisit"].ToString());
+                    if (response.Cookies["cdb2_sid"] != null)
+                        cdb2_sid.Value = response.Cookies["cdb2_sid"].Value;
                     Stream streamReceive = response.GetResponseStream();
-                    Encoding encoding = Encoding.GetEncoding("GB2312");
+                    Encoding encoding = Encoding.GetEncoding(encodingStr);
                     streamReader = new StreamReader(streamReceive, encoding);
                     str = streamReader.ReadToEnd();
                     success = true;

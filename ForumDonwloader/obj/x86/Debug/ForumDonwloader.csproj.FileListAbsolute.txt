@@ -52,3 +52,7 @@ D:\document\new\code\ForumDonwloader\ForumDonwloader\obj\x86\Debug\ForumDonwload
 D:\document\new\code\ForumDonwloader\ForumDonwloader\obj\x86\Debug\ForumDonwloader.csproj.GenerateResource.Cache
 D:\document\new\code\ForumDonwloader\ForumDonwloader\bin\Debug\JavBusDownloader.dll
 D:\document\new\code\ForumDonwloader\ForumDonwloader\bin\Debug\JavBusDownloader.pdb
+D:\document\new\code\ForumDonwloader\ForumDonwloader\bin\Debug\AkibaOnlineDownloader.dll
+D:\document\new\code\ForumDonwloader\ForumDonwloader\bin\Debug\AkibaOnlineDownloader.pdb
+D:\document\new\code\ForumDonwloader\ForumDonwloader\bin\Debug\ThzDownloader.dll
+D:\document\new\code\ForumDonwloader\ForumDonwloader\bin\Debug\ThzDownloader.pdb

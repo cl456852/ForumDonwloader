@@ -21,48 +21,56 @@ namespace Sis001Downloader
         public void Download(object obj)
         {
             AsynObj o = (AsynObj)obj;
-            string[] threads1 = o.Content.Split(new string[] { "版块主题" }, StringSplitOptions.RemoveEmptyEntries);
-            string[] threads = threads1[1].Split(new string[] {  "normalthread_", "pages_btns" }, StringSplitOptions.RemoveEmptyEntries);
-            foreach(string thread in threads)
+            try
             {
-                if(thread.Contains("新窗口打开"))
+                
+                string[] threads1 = o.Content.Split(new string[] { "版块主题" }, StringSplitOptions.RemoveEmptyEntries);
+                string[] threads = threads1[1].Split(new string[] { "normalthread_", "pages_btns" }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string thread in threads)
                 {
-                    string path;
-                    if (thread.Contains("color:"))
+                    if (thread.Contains("新窗口打开"))
                     {
-                        path = Path.Combine(o.Path, nameRegex1.Match(nameRegex.Match(thread).Value).Value.Replace(">", "").Replace("</a", "").Replace('/', '_').Replace(":", "^").Replace("?", "wenhao")) ;
-                    
-                    }
-                    else
-                    {
-                        path = Path.Combine(o.Path, nameRegex1.Match(noColorNameRegex.Match(thread).Value).Value.Replace(">", "").Replace("</a", "").Replace('/', '_').Replace(":", "^").Replace("?", "wenhao"));
+                        string path;
+                        if (thread.Contains("color:"))
+                        {
+                            path = Path.Combine(o.Path, nameRegex1.Match(nameRegex.Match(thread).Value).Value.Replace(">", "").Replace("</a", "").Replace('/', '_').Replace(":", "^").Replace("?", "wenhao"));
 
+                        }
+                        else
+                        {
+                            path = Path.Combine(o.Path, nameRegex1.Match(noColorNameRegex.Match(thread).Value).Value.Replace(">", "").Replace("</a", "").Replace('/', '_').Replace(":", "^").Replace("?", "wenhao"));
+
+                        }
+                        double size = 0;
+                        try
+                        {
+                            string sizeStr = sizeRegex.Matches(thread)[1].Value.Replace("<td class=\"nums\">", "").Replace(" /", "").ToUpper();
+                            string sizeStrWithoutUnit = sizeStr.Replace("GB", "").Replace("G", "").Replace("MB", "").Replace("M", "");
+                            size = Convert.ToDouble(sizeStrWithoutUnit);
+                            if (sizeStr.Contains("G"))
+                                size = size * 1024;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Can not get Size:  " + thread);
+                        }
+                        path += " size^^^" + size + ".htm";
+                        string link = "http://sis001.com/bbs/" + threadRegex.Match(thread).Value.Replace("href=\"", "").Replace("\" title=\"新窗口打开\" target=\"_blank\"><", "");
+                        ThreadPool.QueueUserWorkItem(new Sis001SgDl().work, new AsynObj(path, link));
                     }
-                    double size=0;
-                    try
-                    {
-                        string sizeStr = sizeRegex.Matches(thread)[1].Value.Replace("<td class=\"nums\">", "").Replace(" /", "").ToUpper();
-                        string sizeStrWithoutUnit = sizeStr.Replace("GB", "").Replace("G", "").Replace("MB", "").Replace("M", "");
-                        size = Convert.ToDouble(sizeStrWithoutUnit);
-                        if (sizeStr.Contains("G"))
-                            size = size * 1024;
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Can not get Size:  " + thread);
-                    }
-                    path += " size^^^" + size+".htm";
-                    string link = "http://sis001.com/bbs/" + threadRegex.Match(thread).Value.Replace("href=\"", "").Replace("\" title=\"新窗口打开\" target=\"_blank\"><", "");
-                    ThreadPool.QueueUserWorkItem(new Sis001SgDl().work, new AsynObj(path, link));
+
                 }
-                    
+            }
+            catch (Exception e)
+            {
+                Config1.appendFile(o.Url, Path.Combine( o.Path, "failList.txt"));
             }
         }
 
         void work(Object obj)
         {
             AsynObj asycObj=(AsynObj)obj;
-            string content= Sis001DlTool.GetHtml(asycObj.Url, true);
+            string content= Sis001DlTool.GetHtml(asycObj.Url, true,"GB2312");
             DlTool.SaveFile(content, asycObj.Path);
         }
     }

@@ -18,7 +18,7 @@ namespace JavBusDownloader
             AsynObj o = (AsynObj)obj;
 
 
-            string content = Sis001DlTool.GetHtml(o.Url, true);
+            string content = Sis001DlTool.GetHtml(o.Url, true, "GB2312");
             if (content != "")
             {
                 if (o.Path != null)

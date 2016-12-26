@@ -137,12 +137,18 @@ namespace Framework.tool
             request.Method = "POST";
             //添加Authorization到HTTP头
             request.Headers.Add("Authorization", "Basic " + code);
+                                                 //current_page=%2Findex.asp&next_page=%2Findex.asp&flag=Internet&action_mode=apply&action_script=restart_wan_if&action_wait=5&
             byte[] data = Encoding.ASCII.GetBytes("current_page=%2Findex.asp&next_page=%2Findex.asp&flag=Internet&action_mode=apply&action_script=restart_wan_if&action_wait=5&wan_enable=" + param + "&wans_dualwan=wan+none&wan_unit=0");
             request.ContentLength = data.Length;
             Stream requestStream = request.GetRequestStream();
             requestStream.Write(data, 0, data.Length);
             requestStream.Close();
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream streamReceive = response.GetResponseStream();
+            Encoding encoding = Encoding.GetEncoding("GB2312");
+            StreamReader streamReader = new StreamReader(streamReceive, encoding);
+            string str = streamReader.ReadToEnd();
+            Console.WriteLine(str);
             response.Close();
         }
 
@@ -322,5 +328,9 @@ namespace Framework.tool
                 return false;
         }
 
+        public static string ValidePath(string path)
+        {
+            return path.Replace('/', '_').Replace(":", "^").Replace("?", "_").Replace('\\','_').Replace("|", "");
+        }
     }
 }

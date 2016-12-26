@@ -104,6 +104,10 @@
       <Project>{457b00ce-7f10-4434-b9f2-abcab82fe289}</Project>
       <Name>Sis001Downloader</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ThzDownloader\ThzDownloader.csproj">
+      <Project>{233e5d1b-f9ca-4b69-be2b-e2698ed84462}</Project>
+      <Name>ThzDownloader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

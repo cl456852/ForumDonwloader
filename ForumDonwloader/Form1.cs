@@ -18,6 +18,7 @@ using RarbgDownloader;
 using Sis001Downloader;
 using JavBusDownloader;
 using AkibaOnlineDownloader;
+using ThzDownloader;
 
 namespace ForumDonwloader
 {
@@ -89,6 +90,16 @@ namespace ForumDonwloader
         {
             init();
             IListPageDownloader ldp = new AkibaOnlineDl();
+            for (int i = start; i <= end; i++)
+            {
+                ThreadPool.QueueUserWorkItem(ldp.Download, new AsynObj(path, string.Format(url, i)));
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            init();
+            IListPageDownloader ldp = new ThzLstDl();
             for (int i = start; i <= end; i++)
             {
                 ThreadPool.QueueUserWorkItem(ldp.Download, new AsynObj(path, string.Format(url, i)));

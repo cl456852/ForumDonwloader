@@ -27,37 +27,37 @@ namespace Framework.tool
                 {
                     Config1.mre.WaitOne();
                     CookieContainer cookieContainer = new CookieContainer();
-                    Cookie vDVPaqSe = new Cookie("vDVPaqSe", "r9jSB2Wk", "/", "rarbg.to");
                     Cookie lastVisit = new Cookie("LastVisit", Config1.getLastVisit(), "/", "rarbg.to");
-                    Cookie __utma = new Cookie("__utma", "9515318.860353583.1429342721.1449335760.1449670802.1", "/", ".rarbg.to");
-                    Cookie __utmb = new Cookie("__utmb", "9515318.23.10.1449670802", "/", ".rarbg.to");
-                    Cookie __utmc = new Cookie("__utmc", "9515318", "/", ".rarbg.to");
-                    Cookie __utmz = new Cookie("__utmz", "9515318.1447862416.86.2.utmcsr=rarbg.com|utmccn=(referral)|utmcmd=referral|utmcct=/download.php", "/", ".rarbg.to");
-                    Cookie __utmt = new Cookie("__utmt", "1", "/", ".rarbg.to");
-                    cookieContainer.Add(vDVPaqSe);
+                    //Cookie __utma = new Cookie("__utma", "9515318.860353583.1429342721.1449335760.1449670802.1", "/", ".rarbg.to");
+                    //Cookie __utmb = new Cookie("__utmb", "9515318.23.10.1449670802", "/", ".rarbg.to");
+                    //Cookie __utmc = new Cookie("__utmc", "9515318", "/", ".rarbg.to");
+                    //Cookie __utmz = new Cookie("__utmz", "9515318.1447862416.86.2.utmcsr=rarbg.com|utmccn=(referral)|utmcmd=referral|utmcct=/download.php", "/", ".rarbg.to");
+                    //Cookie __utmt = new Cookie("__utmt", "1", "/", ".rarbg.to");
+                    Cookie c_cookie = new Cookie("c_cookie", "9ctp471aws", "/", ".rarbg.to");
+                    Cookie sk = new Cookie("sk", "ge7v25kibl", "/", "rarbg.to");
+                    Cookie skt = new Cookie("c_cookie", "68grb0gz8l", "/", ".rarbg.to");
+                    Cookie skt1 = new Cookie("skt", "68grb0gz8l", "/", "rarbg.to");
+                    Cookie wQnP98Kj = new Cookie("wQnP98Kj", "wZkvrmuL", "/", "rarbg.to");
+                    Cookie wQnP98Kj1 = new Cookie("wQnP98Kj", "wZkvrmuL", "/", ".rarbg.to");
+                    Cookie expla = new Cookie("expla", "expla", "/", "rarbg.to");
                     cookieContainer.Add(lastVisit);
+                    cookieContainer.Add(c_cookie);
+                    cookieContainer.Add(expla);
                    // cookieContainer.Add(bSbTZF2j);
-                    cookieContainer.Add(__utma);
-                    cookieContainer.Add(__utmb);
-                    cookieContainer.Add(__utmc);
-                    cookieContainer.Add(__utmz);
-                    cookieContainer.Add(__utmt);
+                    cookieContainer.Add(sk);
+                    cookieContainer.Add(skt);
+                    cookieContainer.Add(skt1);
+                    cookieContainer.Add(wQnP98Kj);
+                    cookieContainer.Add(wQnP98Kj1);
                     request = (HttpWebRequest)WebRequest.Create(url);
                     request.CookieContainer = cookieContainer;
-                    request.UserAgent = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36";
+                    request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36";
                     request.Timeout = 15000;
                     request.KeepAlive = false;
-                    request.Referer = "";
-                  //  request.SendChunked = true;
+                    request.Referer = "https://rarbg.to/torrents.php?category=1%3B4&page=542";
+                    request.Host = "rarbg.to";
                     request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-                 //   request.TransferEncoding = "gzip,deflate,sdch";
 
-                    //if (useProxy)
-                    //{
-
-                    //    WebProxy proxy = new WebProxy("10.10.8.1", 3128);
-                    //    request.Proxy = proxy;
-                    //}
                     response = (HttpWebResponse)request.GetResponse();
                     if (response.Cookies["LastVisit"] != null)
                         Config1.setLastVisit( response.Cookies["LastVisit"].ToString());
@@ -65,6 +65,11 @@ namespace Framework.tool
                     Encoding encoding = Encoding.GetEncoding("GB2312");
                     streamReader = new StreamReader(streamReceive, encoding);
                     str = streamReader.ReadToEnd();
+                    if (str.Contains("We have too many requests from your ip"))
+                    {
+                        Config1.Flooding();
+                        continue;
+                    }
                     success = true;
                 }
 
@@ -72,12 +77,7 @@ namespace Framework.tool
                 {
                     
                     Console.WriteLine(ex.Message + "  " + url);
-                    //if (ex.Message.Contains("接收时发生错误")&&!Config1.checkTime())
-                    //{
-                    //    Config1.appendFile(url,"d:\\test\\failList.txt");
-                    //    success = true;
-                    //}
-                    //Config1.Check();
+        
                 }
                 finally
                 {
@@ -138,27 +138,35 @@ namespace Framework.tool
                 {
                     Config1.mre.WaitOne();
                     CookieContainer cookieContainer = new CookieContainer();
-                    Cookie vDVPaqSe = new Cookie("vDVPaqSe", "r9jSB2Wk", "/", "rarbg.to");
                     Cookie lastVisit = new Cookie("LastVisit", Config1.getLastVisit(), "/", "rarbg.to");
-                    Cookie __utma = new Cookie("__utma", "9515318.860353583.1429342721.1449335760.1449670802.1", "/", ".rarbg.to");
-                    Cookie __utmb = new Cookie("__utmb", "9515318.23.10.1449670802", "/", ".rarbg.to");
-                    Cookie __utmc = new Cookie("__utmc", "9515318", "/", ".rarbg.to");
-                    Cookie __utmz = new Cookie("__utmz", "9515318.1447862416.86.2.utmcsr=rarbg.com|utmccn=(referral)|utmcmd=referral|utmcct=/download.php", "/", ".rarbg.to");
-                    Cookie __utmt = new Cookie("__utmt", "1", "/", ".rarbg.to");
-                    cookieContainer.Add(vDVPaqSe);
+                    //Cookie __utma = new Cookie("__utma", "9515318.860353583.1429342721.1449335760.1449670802.1", "/", ".rarbg.to");
+                    //Cookie __utmb = new Cookie("__utmb", "9515318.23.10.1449670802", "/", ".rarbg.to");
+                    //Cookie __utmc = new Cookie("__utmc", "9515318", "/", ".rarbg.to");
+                    //Cookie __utmz = new Cookie("__utmz", "9515318.1447862416.86.2.utmcsr=rarbg.com|utmccn=(referral)|utmcmd=referral|utmcct=/download.php", "/", ".rarbg.to");
+                    //Cookie __utmt = new Cookie("__utmt", "1", "/", ".rarbg.to");
+                    Cookie c_cookie = new Cookie("c_cookie", "9ctp471aws", "/", ".rarbg.to");
+                    Cookie sk = new Cookie("sk", "ge7v25kibl", "/", "rarbg.to");
+                    Cookie skt = new Cookie("c_cookie", "68grb0gz8l", "/", ".rarbg.to");
+                    Cookie skt1 = new Cookie("skt", "68grb0gz8l", "/", "rarbg.to");
+                    Cookie wQnP98Kj = new Cookie("wQnP98Kj", "wZkvrmuL", "/", "rarbg.to");
+                    Cookie wQnP98Kj1 = new Cookie("wQnP98Kj", "wZkvrmuL", "/", ".rarbg.to");
+                    Cookie expla = new Cookie("expla", "expla", "/", "rarbg.to");
                     cookieContainer.Add(lastVisit);
-                   // cookieContainer.Add(bSbTZF2j);
-                    cookieContainer.Add(__utma);
-                    cookieContainer.Add(__utmb);
-                    cookieContainer.Add(__utmc);
-                    cookieContainer.Add(__utmz);
-                    cookieContainer.Add(__utmt);
+                    cookieContainer.Add(c_cookie);
+                    cookieContainer.Add(expla);
+                    // cookieContainer.Add(bSbTZF2j);
+                    cookieContainer.Add(sk);
+                    cookieContainer.Add(skt);
+                    cookieContainer.Add(skt1);
+                    cookieContainer.Add(wQnP98Kj);
+                    cookieContainer.Add(wQnP98Kj1);
                     request = (HttpWebRequest)WebRequest.Create(url);
                     request.CookieContainer = cookieContainer;
-                    request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36";
+                    request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36";
                     request.Timeout = 15000;
                     request.KeepAlive = false;
                     request.Referer = "http://rarbg.to/torrent/j1kx3ny";
+                    request.Host = "rarbg.to";
                     //if (useProxy)
                     //{
                     //    WebProxy proxy = new WebProxy("10.10.8.1", 3128);
@@ -191,7 +199,7 @@ namespace Framework.tool
                     stream.CopyTo(fstream);
                     SaveFile(content, name+".htm");
                     success = true;
-
+                    
                 }
 
                 catch (Exception ex)

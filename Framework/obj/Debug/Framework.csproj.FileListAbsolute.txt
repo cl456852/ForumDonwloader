@@ -12,6 +12,6 @@ D:\document\new\work\ForumDonwloader\Framework\obj\Debug\Framework.dll
 D:\document\new\work\ForumDonwloader\Framework\obj\Debug\Framework.pdb
 D:\document\new\code\ForumDonwloader\Framework\bin\Debug\Framework.dll
 D:\document\new\code\ForumDonwloader\Framework\bin\Debug\Framework.pdb
-D:\document\new\code\ForumDonwloader\Framework\obj\Debug\Framework.csprojResolveAssemblyReference.cache
 D:\document\new\code\ForumDonwloader\Framework\obj\Debug\Framework.dll
 D:\document\new\code\ForumDonwloader\Framework\obj\Debug\Framework.pdb
+D:\document\new\code\ForumDonwloader\Framework\obj\Debug\Framework.csprojResolveAssemblyReference.cache

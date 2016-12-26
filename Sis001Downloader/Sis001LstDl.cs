@@ -17,7 +17,7 @@ namespace Sis001Downloader
             AsynObj o = (AsynObj)obj;
 
 
-            string content = Sis001DlTool.GetHtml(o.Url, true);
+            string content = Sis001DlTool.GetHtml(o.Url, true, "GB2312");
             if (content != "")
             {
                 //string[] contents = content.Split(new string[] { "<td align=\"center\">" }, StringSplitOptions.RemoveEmptyEntries);

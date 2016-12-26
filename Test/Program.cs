@@ -51,7 +51,8 @@ namespace Framework.tool
             //    }
             //}
 
-            checkRouterStatusNew(0);
+           // checkRouterStatusNew(0);
+            Config1.Flooding();
             Console.ReadLine();
         }
 
