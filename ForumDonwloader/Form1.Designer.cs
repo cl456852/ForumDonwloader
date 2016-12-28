@@ -55,7 +55,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(409, 21);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "http://thzbt.biz/forum-220-{0}.html";
+            this.textBox1.Text = "http://taohuabt.info/forum-220-{0}.html";
             // 
             // textBox2
             // 

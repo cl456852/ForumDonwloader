@@ -251,6 +251,16 @@ namespace Framework.tool
                 lastVisit = s;
             }
         }
+
+        public static CookieContainer coockieContainer=new CookieContainer();
+
+        public static void setCoockies(Uri uri, string cookieHeader)
+        {
+
+            coockieContainer.SetCookies(uri, cookieHeader);
+            
+        }
+
         public static string getLastVisit()
         {
             return lastVisit;
