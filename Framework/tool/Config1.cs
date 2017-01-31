@@ -13,6 +13,7 @@ namespace Framework.tool
     {
         public const string EMPTY_URL = "https://www.akiba-online.com/forums/iv-torrents.172/page-2?order=post_date";
 
+        public static BlockingQueue<AsynObj> BlockingQueue=new BlockingQueue<AsynObj>();
 
         public static string InvalidPathFilter(string path)
         {
@@ -138,7 +139,7 @@ namespace Framework.tool
             //添加Authorization到HTTP头
             request.Headers.Add("Authorization", "Basic " + code);
                                                  //current_page=%2Findex.asp&next_page=%2Findex.asp&flag=Internet&action_mode=apply&action_script=restart_wan_if&action_wait=5&
-            byte[] data = Encoding.ASCII.GetBytes("current_page=%2Findex.asp&next_page=%2Findex.asp&flag=Internet&action_mode=apply&action_script=restart_wan_if&action_wait=5&wan_enable=" + param + "&wans_dualwan=wan+none&wan_unit=0");
+            byte[] data = Encoding.ASCII.GetBytes("current_page=%2Findex.asp&next_page=%2Findex.asp&flag=Internet&action_mode=apply&action_script=restart_wan_if&action_wait=5&wan_enable=" + param + "&wans_dualwan=wan+none&wan_unit=0&wans_mode=fo");
             request.ContentLength = data.Length;
             Stream requestStream = request.GetRequestStream();
             requestStream.Write(data, 0, data.Length);
@@ -149,6 +150,72 @@ namespace Framework.tool
             StreamReader streamReader = new StreamReader(streamReceive, encoding);
             string str = streamReader.ReadToEnd();
             Console.WriteLine(str);
+            response.Close();
+        }
+
+        static void routerRedail(int param)
+        {
+            HttpWebRequest request = null;
+            HttpWebResponse response = null;
+            string gethost = string.Empty;
+            CookieContainer cc = new CookieContainer();
+            string Cookiesstr = string.Empty;
+
+            string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=QVNVUzoxMTExMTFh";
+            string LoginUrl = "http://router.asus.com/login.cgi";
+            request = (HttpWebRequest)WebRequest.Create(LoginUrl);//实例化web访问类   
+            request.Method = "POST";//数据提交方式为POST   
+            //模拟头   
+            request.ContentType = "application/x-www-form-urlencoded";
+            byte[] postdatabytes = Encoding.UTF8.GetBytes(postData);
+            request.ContentLength = postdatabytes.Length;
+            request.AllowAutoRedirect = false;
+            request.CookieContainer = cc;
+            request.KeepAlive = true;
+            //提交请求   
+            Stream stream;
+            stream = request.GetRequestStream();
+            stream.Write(postdatabytes, 0, postdatabytes.Length);
+            stream.Close();
+            //接收响应   
+            response = (HttpWebResponse)request.GetResponse();
+            //保存返回cookie   
+            response.Cookies = request.CookieContainer.GetCookies(request.RequestUri);
+            CookieCollection cook = response.Cookies;
+            string strcrook = request.CookieContainer.GetCookieHeader(request.RequestUri);
+            Cookiesstr = strcrook;
+            //取第一次GET跳转地址   
+            StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            string content = sr.ReadToEnd();
+            response.Close();
+            gethost = "http://router.asus.com/start_apply2.htm";
+
+           
+            request = (HttpWebRequest)WebRequest.Create(gethost);
+            request.Method = "POST";
+            request.KeepAlive = true;
+                                                         //_ceg.s=ogqswo; _ceg.u=ogqswo; traffic_warning_0=2017.0:1; _ga=GA1.2.1397880773.1479308566; wireless_list_9C:5C:8E:8C:05:A0_temp=<CC:2D:83:43:C2:B8>Yes<64:A5:C3:E2:7C:68>No<A4:D1:8C:C4:53:C4>No; asus_token=7160076249881435368878789362127; wireless_list_9C:5C:8E:8C:05:A0=<CC:2D:83:43:C2:B8>Yes
+            request.Headers.Add("Cookie:" + Cookiesstr );
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.AllowAutoRedirect = true;
+            request.Host = "router.asus.com";
+            request.Referer = "http://router.asus.com/device-map/internet.asp";
+            request.Headers.Add("Origin", "http://router.asus.com");
+            request.Headers.Add("Upgrade-Insecure-Requests", "1");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36";
+                                                 //current_page=%2Findex.asp&next_page=%2Findex.asp&flag=Internet&action_mode=apply&action_script=restart_wan_if&action_wait=5&wan_enable=0        &wans_dualwan=wan+none&wan_unit=0&wans_mode=fo 
+            byte[] data = Encoding.UTF8.GetBytes("current_page=%2Findex.asp&next_page=%2Findex.asp&flag=Internet&action_mode=apply&action_script=restart_wan_if&action_wait=5&wan_enable=" + param + "&wans_dualwan=wan+none&wan_unit=0&wans_mode=fo");
+            request.ContentLength = data.Length;
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(data, 0, data.Length);
+            requestStream.Close();
+
+            response = (HttpWebResponse)request.GetResponse();
+
+        
+            StreamReader sr1 = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            string ss = sr1.ReadToEnd();
+            sr1.Close();
             response.Close();
         }
 
@@ -274,10 +341,10 @@ namespace Framework.tool
                 if (param == 0)
                     while (true)
                     {
-                        redailRouter(0);
+                        routerRedail(0);
                         Console.WriteLine("disconnect");
                         Thread.Sleep(5000);
-                        if (checkRouterStatus(5))
+                        if (getRouterStat(5))
                         {
                             Console.WriteLine("disconnect Check Successful");
                             break;
@@ -288,10 +355,10 @@ namespace Framework.tool
                 if (param == 1)
                     while (true)
                     {
-                        redailRouter(1);
+                        routerRedail(1);
                         Console.WriteLine("connect");
                         Thread.Sleep(10000);
-                        if (checkRouterStatus(2))
+                        if (getRouterStat(2))
                         {
                             Console.WriteLine("connect Check Successful");
                             break;
@@ -336,6 +403,64 @@ namespace Framework.tool
                 return true;
             else
                 return false;
+        }
+
+        public static bool getRouterStat(int status)
+        {
+            HttpWebRequest request = null;
+            HttpWebResponse response = null;
+            string gethost = string.Empty;
+            CookieContainer cc = new CookieContainer();
+            string Cookiesstr = string.Empty;
+
+            string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=QVNVUzoxMTExMTFh";
+            string LoginUrl = "http://router.asus.com/login.cgi";
+            request = (HttpWebRequest)WebRequest.Create(LoginUrl);//实例化web访问类   
+            request.Method = "POST";//数据提交方式为POST   
+            //模拟头   
+            request.ContentType = "application/x-www-form-urlencoded";
+            byte[] postdatabytes = Encoding.UTF8.GetBytes(postData);
+            request.ContentLength = postdatabytes.Length;
+            request.AllowAutoRedirect = false;
+            request.CookieContainer = cc;
+            request.KeepAlive = true;
+            //提交请求   
+            Stream stream;
+            stream = request.GetRequestStream();
+            stream.Write(postdatabytes, 0, postdatabytes.Length);
+            stream.Close();
+            //接收响应   
+            response = (HttpWebResponse)request.GetResponse();
+            //保存返回cookie   
+            response.Cookies = request.CookieContainer.GetCookies(request.RequestUri);
+            CookieCollection cook = response.Cookies;
+            string strcrook = request.CookieContainer.GetCookieHeader(request.RequestUri);
+            Cookiesstr = strcrook;
+            //取第一次GET跳转地址   
+            StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            string content = sr.ReadToEnd();
+            response.Close();
+            gethost = "http://router.asus.com/ajax_status.xml";
+           
+            request = (HttpWebRequest)WebRequest.Create(gethost);
+            request.Method = "POST";
+            request.KeepAlive = true;
+            request.Headers.Add("Cookie:" + Cookiesstr);
+     
+            request.AllowAutoRedirect = true;
+            request.Host = "router.asus.com";
+            request.Headers.Add("Upgrade-Insecure-Requests", "1");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36";
+            response = (HttpWebResponse)request.GetResponse();
+
+        
+            StreamReader sr1 = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            string ss = sr1.ReadToEnd();
+            sr1.Close();
+            response.Close();
+            if (ss.Contains("<first_wan>" + status + "</first_wan>"))
+                return true;
+            return false;
         }
 
         public static string ValidePath(string path)

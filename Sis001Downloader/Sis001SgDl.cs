@@ -33,12 +33,12 @@ namespace Sis001Downloader
                         string path;
                         if (thread.Contains("color:"))
                         {
-                            path = Path.Combine(o.Path, nameRegex1.Match(nameRegex.Match(thread).Value).Value.Replace(">", "").Replace("</a", "").Replace('/', '_').Replace(":", "^").Replace("?", "wenhao"));
+                            path = Path.Combine(o.Path, DlTool.ReplaceUrl( nameRegex1.Match(nameRegex.Match(thread).Value).Value));
 
                         }
                         else
                         {
-                            path = Path.Combine(o.Path, nameRegex1.Match(noColorNameRegex.Match(thread).Value).Value.Replace(">", "").Replace("</a", "").Replace('/', '_').Replace(":", "^").Replace("?", "wenhao"));
+                            path = Path.Combine(o.Path,DlTool.ReplaceUrl( nameRegex1.Match(noColorNameRegex.Match(thread).Value).Value));
 
                         }
                         double size = 0;

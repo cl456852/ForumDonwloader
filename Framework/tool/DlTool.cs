@@ -34,21 +34,24 @@ namespace Framework.tool
                     //Cookie __utmz = new Cookie("__utmz", "9515318.1447862416.86.2.utmcsr=rarbg.com|utmccn=(referral)|utmcmd=referral|utmcct=/download.php", "/", ".rarbg.to");
                     //Cookie __utmt = new Cookie("__utmt", "1", "/", ".rarbg.to");
                     Cookie c_cookie = new Cookie("c_cookie", "9ctp471aws", "/", ".rarbg.to");
-                    Cookie sk = new Cookie("sk", "ge7v25kibl", "/", "rarbg.to");
-                    Cookie skt = new Cookie("c_cookie", "68grb0gz8l", "/", ".rarbg.to");
-                    Cookie skt1 = new Cookie("skt", "68grb0gz8l", "/", "rarbg.to");
+                    Cookie rarbg = new Cookie("rarbg", "1%7CThu%2C%2026%20Jan%202017%2014%3A13%3A00%20GMT", "/", "rarbg.to");
+                    Cookie tcc = new Cookie("tcc", "", "/", ".rarbg.to");
+                    Cookie skt = new Cookie("skt", "FBK40c6gie", "/", "rarbg.to");
+                    Cookie skt1 = new Cookie("skt", "FBK40c6gie", "/", ".rarbg.to");
                     Cookie wQnP98Kj = new Cookie("wQnP98Kj", "wZkvrmuL", "/", "rarbg.to");
                     Cookie wQnP98Kj1 = new Cookie("wQnP98Kj", "wZkvrmuL", "/", ".rarbg.to");
-                    Cookie expla = new Cookie("expla", "expla", "/", "rarbg.to");
+                    Cookie expla = new Cookie("expla", "4", "/", "rarbg.to");
+                    Cookie aby = new Cookie("aby", "1", "/", "rarbg.to");
                     cookieContainer.Add(lastVisit);
                     cookieContainer.Add(c_cookie);
                     cookieContainer.Add(expla);
-                   // cookieContainer.Add(bSbTZF2j);
-                    cookieContainer.Add(sk);
-                    cookieContainer.Add(skt);
-                    cookieContainer.Add(skt1);
-                    cookieContainer.Add(wQnP98Kj);
                     cookieContainer.Add(wQnP98Kj1);
+                    cookieContainer.Add(rarbg);
+                    cookieContainer.Add(tcc);
+                    cookieContainer.Add(skt);
+                    cookieContainer.Add(aby);
+                    cookieContainer.Add(wQnP98Kj);
+                    cookieContainer.Add(skt1);
                     request = (HttpWebRequest)WebRequest.Create(url);
                     request.CookieContainer = cookieContainer;
                     request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36";
@@ -67,7 +70,8 @@ namespace Framework.tool
                     str = streamReader.ReadToEnd();
                     if (str.Contains("We have too many requests from your ip"))
                     {
-                        Config1.Flooding();
+                       // Config1.Flooding();
+                        Console.Write("We have too many requests from your ip");
                         continue;
                     }
                     success = true;
@@ -191,7 +195,9 @@ namespace Framework.tool
                     string fileContent = reader.ReadToEnd();
                     if (fileContent.Contains("We are sorry but this is pure flooding"))
                     {
-                        Config1.Flooding();
+                      //  Config1.Flooding();
+                        Console.Write("We have too many requests from your ip");
+
                         continue;
                     }
                     stream.Position = 0;
@@ -232,6 +238,11 @@ namespace Framework.tool
                 }
             }
 
+        }
+
+        public static string ReplaceUrl(string url)
+        {
+            return url.Replace(">", "").Replace("</a", "").Replace('/', '_').Replace(":", "^").Replace("?", "wenhao");
         }
     }
 }

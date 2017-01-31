@@ -24,7 +24,7 @@ namespace Sis001Downloader
                 //content = contents[1];
                 if (o.Path != null)
                 {
-                    DlTool.SaveFile(content, Path.Combine(o.Path, o.Url.Replace('/', '_').Replace(":", "^").Replace("?", "wenhao")) + ".htm");
+                    DlTool.SaveFile(content, Path.Combine(o.Path, DlTool.ReplaceUrl(o.Url) + ".htm"));
 
                 }
                 Sis001SgDl sgDl = new Sis001SgDl();

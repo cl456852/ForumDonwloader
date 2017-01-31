@@ -43,11 +43,6 @@ namespace Framework.tool
 
         string htmlName;
 
-        public string HtmlName
-        {
-            get { return htmlName; }
-            set { htmlName = value; }
-        }
 
         string singleContent;
 
@@ -56,5 +51,14 @@ namespace Framework.tool
             get { return singleContent; }
             set { singleContent = value; }
         }
+
+        private string taskType;
+
+        public string TaskType
+        {
+            get { return taskType; }
+            set { taskType = value; }
+        }
+
     }
 }

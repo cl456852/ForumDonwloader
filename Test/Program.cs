@@ -10,6 +10,7 @@ using System.Threading;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Framework.tool
 {
@@ -18,42 +19,7 @@ namespace Framework.tool
         static void Main(string[] args)
         {
             Program p = new Program();
-            //p.redail();
-            // checkTime();
-            //appendFile("nigga", "d:\\test\\failList.txt");
-            //appendFile("nigga2", "d:\\test\\failList.txt");
-            //while (true)
-            //{
-            //    while (true)
-            //    {
-            //        RouterTest(0);
-            //        Console.WriteLine("disconnect");
-            //        Thread.Sleep(5000);
-            //        if (checkRouterStatus(5))
-            //        {
-            //            Console.WriteLine("disconnect Check Successful");
-            //            break;
-            //        }
-            //        Console.WriteLine("disconnect Check Fail");
-
-            //    }
-            //    w0hile (true)
-            //    {
-            //        RouterTest(1);
-            //        Console.WriteLine("connect");
-            //        Thread.Sleep(10000);
-            //        if (checkRouterStatus(2))
-            //        {
-            //            Console.WriteLine("connect Check Successful");
-            //            break;
-            //        }
-            //        Console.WriteLine("connect Check Fail");
-            //    }
-            //}
-
-           // checkRouterStatusNew(0);
-            Config1.Flooding();
-            Console.ReadLine();
+            p.webBrowserTest();
         }
 
         void test()
@@ -247,6 +213,83 @@ namespace Framework.tool
             str = streamReader.ReadToEnd();
         }
 
+        public static void getRouterStat()
+        {
+            HttpWebRequest request = null;
+            HttpWebResponse response = null;
+            string gethost = string.Empty;
+            CookieContainer cc = new CookieContainer();
+            string Cookiesstr = string.Empty;
+
+            string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=QVNVUzoxMTExMTFh";
+            string LoginUrl = "http://router.asus.com/login.cgi";
+            request = (HttpWebRequest)WebRequest.Create(LoginUrl);//实例化web访问类   
+            request.Method = "POST";//数据提交方式为POST   
+            //模拟头   
+            request.ContentType = "application/x-www-form-urlencoded";
+            byte[] postdatabytes = Encoding.UTF8.GetBytes(postData);
+            request.ContentLength = postdatabytes.Length;
+            //request.Referer = "http://www.renren.com/Login.do?rf=r&domain=renren.com&origURL=" + HostUrl;   
+            request.AllowAutoRedirect = false;
+            request.CookieContainer = cc;
+            request.KeepAlive = true;
+            //提交请求   
+            Stream stream;
+            stream = request.GetRequestStream();
+            stream.Write(postdatabytes, 0, postdatabytes.Length);
+            stream.Close();
+            //接收响应   
+            response = (HttpWebResponse)request.GetResponse();
+            //保存返回cookie   
+            response.Cookies = request.CookieContainer.GetCookies(request.RequestUri);
+            CookieCollection cook = response.Cookies;
+            string strcrook = request.CookieContainer.GetCookieHeader(request.RequestUri);
+            Cookiesstr = strcrook;
+            //取第一次GET跳转地址   
+            StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            string content = sr.ReadToEnd();
+            response.Close();
+            string[] substr = content.Split(new char[] { '"' });
+            gethost = "http://router.asus.com/ajax_status.xml";
+
+            //
+
+            request = (HttpWebRequest)WebRequest.Create(gethost);
+            request.Method = "POST";
+            request.KeepAlive = true;
+            request.Headers.Add("Cookie:" + Cookiesstr );
+           // request.CookieContainer = cc;
+            request.AllowAutoRedirect = true;
+            request.Host = "router.asus.com";
+            request.Headers.Add("Upgrade-Insecure-Requests","1");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36";
+            response = (HttpWebResponse)request.GetResponse();
+
+            //设置cookie   
+           // Cookiesstr = request.CookieContainer.GetCookieHeader(request.RequestUri);
+            //取再次跳转链接   
+            StreamReader sr1 = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            string ss = sr1.ReadToEnd();
+            sr1.Close();
+            response.Close();  
+        }
+
+         void webBrowserTest()
+        {
+           Thread  newThread= new Thread(MainFormMessageThread);
+           newThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            newThread.Name = "ActiveXThread";
+            newThread.Start();
+            Console.Read();
+        }
+
+        void MainFormMessageThread()
+         {
+             WebBrowser webBrowser = new WebBrowser();
+             webBrowser.Navigate("https://www.baidu.com/");
+             Thread.Sleep(10000);
+             Console.WriteLine(webBrowser.DocumentText);
+         }
 
 
         void RegexTest()

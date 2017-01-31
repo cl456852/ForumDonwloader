@@ -55,7 +55,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(409, 21);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "http://taohuabt.info/forum-220-{0}.html";
+            this.textBox1.Text = "https://rarbg.to/torrents.php?category=1%3B4&page={0}";
             // 
             // textBox2
             // 
@@ -104,7 +104,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(243, 366);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(106, 18);
             this.button4.TabIndex = 8;

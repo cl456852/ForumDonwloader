@@ -28,7 +28,7 @@ namespace ThzDownloader
                     if (thread.Contains("桃花族论坛"))
                         continue;
                    
-                    string path= Path.Combine(o.Path, nameRegex1.Match(nameRegex.Match(thread).Value).Value.Replace(">", "").Replace("</a", "").Replace('/', '_').Replace(":", "^").Replace("?", "wenhao"))+".htm";
+                    string path= Path.Combine(o.Path, DlTool.ReplaceUrl( nameRegex1.Match(nameRegex.Match(thread).Value).Value))+".htm";
                     string link = "http://taohuabt.info/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
                     ThreadPool.QueueUserWorkItem(new ThzSgDl().work, new AsynObj(path, link));
                     

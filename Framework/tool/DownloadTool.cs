@@ -46,7 +46,7 @@ namespace Framework.tool
                         request.Proxy = proxy;
                     }
                     response = (HttpWebResponse)request.GetResponse();
-                    Config1.setCoockies(new Uri("http://taohuabt.info"),response.Headers[HttpResponseHeader.SetCookie]);
+                    //Config1.setCoockies(new Uri("http://taohuabt.info"),response.Headers[HttpResponseHeader.SetCookie]);
                     Stream streamReceive = response.GetResponseStream();
                     Encoding encoding = Encoding.GetEncoding("utf-8");
                     streamReader = new StreamReader(streamReceive, encoding);

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkibaOnlineDownloader", "Ak
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThzDownloader", "ThzDownloader\ThzDownloader.csproj", "{233E5D1B-F9CA-4B69-BE2B-E2698ED84462}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{BC723166-9AA6-4E4A-A71E-483C91356DE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,16 @@ Global
 		{233E5D1B-F9CA-4B69-BE2B-E2698ED84462}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{233E5D1B-F9CA-4B69-BE2B-E2698ED84462}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{233E5D1B-F9CA-4B69-BE2B-E2698ED84462}.Release|x86.ActiveCfg = Release|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

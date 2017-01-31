@@ -24,7 +24,7 @@ namespace AkibaOnlineDownloader
             {
                 if (o.Path != null)
                 {
-                    DlTool.SaveFile(content, Path.Combine(o.Path, o.Url.Replace('/', '_').Replace(":", "^").Replace("?", "wenhao")) + ".htm");
+                    DlTool.SaveFile(content, Path.Combine(o.Path,DlTool.ReplaceUrl( o.Url)) + ".htm");
 
                 }
                 AkibaOnlineSgDl sgDl = new AkibaOnlineSgDl();
