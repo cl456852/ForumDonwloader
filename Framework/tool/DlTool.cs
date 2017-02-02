@@ -125,7 +125,7 @@ namespace Framework.tool
             sw.Close();   
         }
             
-        public static void downLoadFile(string url,string name,bool useProxy,string content)
+        public static void downLoadFile(string url,string name,bool useProxy,string content, string cookieStr)
         {
 
             bool success = false;
@@ -141,41 +141,36 @@ namespace Framework.tool
                 try
                 {
                     Config1.mre.WaitOne();
-                    CookieContainer cookieContainer = new CookieContainer();
-                    Cookie lastVisit = new Cookie("LastVisit", Config1.getLastVisit(), "/", "rarbg.to");
-                    //Cookie __utma = new Cookie("__utma", "9515318.860353583.1429342721.1449335760.1449670802.1", "/", ".rarbg.to");
-                    //Cookie __utmb = new Cookie("__utmb", "9515318.23.10.1449670802", "/", ".rarbg.to");
-                    //Cookie __utmc = new Cookie("__utmc", "9515318", "/", ".rarbg.to");
-                    //Cookie __utmz = new Cookie("__utmz", "9515318.1447862416.86.2.utmcsr=rarbg.com|utmccn=(referral)|utmcmd=referral|utmcct=/download.php", "/", ".rarbg.to");
-                    //Cookie __utmt = new Cookie("__utmt", "1", "/", ".rarbg.to");
-                    Cookie c_cookie = new Cookie("c_cookie", "9ctp471aws", "/", ".rarbg.to");
-                    Cookie sk = new Cookie("sk", "ge7v25kibl", "/", "rarbg.to");
-                    Cookie skt = new Cookie("c_cookie", "68grb0gz8l", "/", ".rarbg.to");
-                    Cookie skt1 = new Cookie("skt", "68grb0gz8l", "/", "rarbg.to");
-                    Cookie wQnP98Kj = new Cookie("wQnP98Kj", "wZkvrmuL", "/", "rarbg.to");
-                    Cookie wQnP98Kj1 = new Cookie("wQnP98Kj", "wZkvrmuL", "/", ".rarbg.to");
-                    Cookie expla = new Cookie("expla", "expla", "/", "rarbg.to");
-                    cookieContainer.Add(lastVisit);
-                    cookieContainer.Add(c_cookie);
-                    cookieContainer.Add(expla);
-                    // cookieContainer.Add(bSbTZF2j);
-                    cookieContainer.Add(sk);
-                    cookieContainer.Add(skt);
-                    cookieContainer.Add(skt1);
-                    cookieContainer.Add(wQnP98Kj);
-                    cookieContainer.Add(wQnP98Kj1);
+//                    CookieContainer cookieContainer = new CookieContainer();
+//                    Cookie lastVisit = new Cookie("LastVisit", Config1.getLastVisit(), "/", "rarbg.to");
+//                    Cookie c_cookie = new Cookie("c_cookie", "9ctp471aws", "/", ".rarbg.to");
+//                    Cookie sk = new Cookie("sk", "ge7v25kibl", "/", "rarbg.to");
+//                    Cookie skt = new Cookie("c_cookie", "68grb0gz8l", "/", ".rarbg.to");
+//                    Cookie skt1 = new Cookie("skt", "68grb0gz8l", "/", "rarbg.to");
+//                    Cookie wQnP98Kj = new Cookie("wQnP98Kj", "wZkvrmuL", "/", "rarbg.to");
+//                    Cookie wQnP98Kj1 = new Cookie("wQnP98Kj", "wZkvrmuL", "/", ".rarbg.to");
+//                    Cookie expla = new Cookie("expla", "expla", "/", "rarbg.to");
+//                    cookieContainer.Add(lastVisit);
+//                    cookieContainer.Add(c_cookie);
+//                    cookieContainer.Add(expla);
+//                    cookieContainer.Add(sk);
+//                    cookieContainer.Add(skt);
+//                    cookieContainer.Add(skt1);
+//                    cookieContainer.Add(wQnP98Kj);
+//                    cookieContainer.Add(wQnP98Kj1);
                     request = (HttpWebRequest)WebRequest.Create(url);
-                    request.CookieContainer = cookieContainer;
+                    request.Headers.Add("Cookie:",Config1.Cookie);
+                  //  request.CookieContainer = cookieContainer;
                     request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36";
                     request.Timeout = 15000;
                     request.KeepAlive = false;
                     request.Referer = "http://rarbg.to/torrent/j1kx3ny";
                     request.Host = "rarbg.to";
-                    //if (useProxy)
-                    //{
-                    //    WebProxy proxy = new WebProxy("10.10.8.1", 3128);
-                    //    request.Proxy = proxy;
-                    //}
+                    if (useProxy)
+                    {
+                        WebProxy proxy = new WebProxy("10.10.8.1", 3128);
+                        request.Proxy = proxy;
+                    }
                     response = (HttpWebResponse)request.GetResponse();
                     if (response.Cookies["LastVisit"] != null)
                         Config1.setLastVisit(response.Cookies["LastVisit"].ToString());
@@ -195,7 +190,7 @@ namespace Framework.tool
                     string fileContent = reader.ReadToEnd();
                     if (fileContent.Contains("We are sorry but this is pure flooding"))
                     {
-                      //  Config1.Flooding();
+                        Config1.Flooding();
                         Console.Write("We have too many requests from your ip");
 
                         continue;

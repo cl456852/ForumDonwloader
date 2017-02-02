@@ -11,6 +11,8 @@ namespace Framework.tool
 {
     public class Config1
     {
+        public static string Cookie;
+
         public const string EMPTY_URL = "https://www.akiba-online.com/forums/iv-torrents.172/page-2?order=post_date";
 
         public static BlockingQueue<AsynObj> BlockingQueue=new BlockingQueue<AsynObj>();

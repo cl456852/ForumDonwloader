@@ -93,7 +93,7 @@ namespace RarbgDownloader
 
             }
             path = path.Replace("%20", " ").Replace("%2C", " ");
-            DlTool.downLoadFile(url, path, DlConfig.useProxy,content);
+            DlTool.downLoadFile(url, path, DlConfig.useProxy,content,Config1.Cookie);
         }
 
         private bool check2(string name)
