@@ -22,6 +22,7 @@ namespace WindowsFormsApplication1
             var content = webBrowser.DocumentText;
             if (url.Contains("page="))
             {
+                DlTool.SaveFile(content,Path.Combine( Config1.ValidePath(url)));
                 var mc = regex.Matches(content);
                 foreach (Match m in mc)
                     if (!m.Value.Contains("#comments") &&
@@ -43,9 +44,6 @@ namespace WindowsFormsApplication1
         {
             string genreStr = "";
             MatchCollection genresMatches;
-            string dateString =
-                releaseDateRegex.Match(content).Value.Replace("\"releaseDate\">", "").Replace("</td></tr>", "");
-            DateTime releaseDate = Convert.ToDateTime(dateString);
             string url = "https://rarbg.to/" + torrentRegex.Match(content).Value;
             Match genres = genresRegex.Match(content);
             if (genres != null && genres.Value != "")
@@ -63,35 +61,6 @@ namespace WindowsFormsApplication1
                 path =
                     Path.Combine(path, "notok", genreStr + "$$" + url.Substring(url.LastIndexOf('=') + 1))
                         .Replace("%22", "");
-            }
-            else if (releaseDate.CompareTo(new DateTime(2014, 8, 1)) < 0)
-            {
-                if (genres != null && genres.Value != "")
-                {
-                    int res = Check(genreStr.Substring(0, genreStr.Length - 1).Replace("%22", ""));
-                    if (res == 1)
-                    {
-                        path =
-                            Path.Combine(path, genreStr + "$$" + url.Substring(url.LastIndexOf('=') + 1))
-                                .Replace("%22", "");
-                    }
-                    else if (res == -1)
-                    {
-                        path =
-                            Path.Combine(path, "notok", genreStr + "$$" + url.Substring(url.LastIndexOf('=') + 1))
-                                .Replace("%22", "");
-                    }
-                    else
-                    {
-                        path =
-                            Path.Combine(path, "unknown", genreStr + "$$" + url.Substring(url.LastIndexOf('=') + 1))
-                                .Replace("%22", "");
-                    }
-                }
-                else
-                {
-                    path = Path.Combine(path, "unknown", url.Substring(url.LastIndexOf('=') + 1)).Replace("%22", "");
-                }
             }
             else
             {

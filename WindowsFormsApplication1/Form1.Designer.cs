@@ -73,7 +73,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "D:\\test6";
+            this.textBox1.Text = "c:\\test6";
             // 
             // textBox2
             // 
@@ -89,7 +89,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 21);
             this.textBox3.TabIndex = 5;
-            this.textBox3.Text = "100";
+            this.textBox3.Text = "3";
             // 
             // button3
             // 

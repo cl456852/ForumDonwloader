@@ -27,5 +27,14 @@ namespace Framework
             base.Enqueue(t);//出队
             semaphore.Release();//释放信号量
         }
+
+        public T Peek()
+        {
+            T t = default(T);//创建一个类型T的对象
+            semaphore.WaitOne();//请求信号量，信号量=0，就会阻塞了
+            base.TryPeek(out t);//然后出队，继承于同步队列，因此不用加锁了
+            semaphore.Release();
+            return t;
+        }
     }
 }

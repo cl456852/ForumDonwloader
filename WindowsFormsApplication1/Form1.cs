@@ -39,18 +39,33 @@ namespace WindowsFormsApplication1
             if (content.Contains("Please wait while we try to verify your browser"))
             {
                 Console.WriteLine("Please wait while we try to verify your browser");
-                webBrowser1.Navigate(url + i);
+                //webBrowser1.Navigate(url + i);
                 return;
             }
+            if (content.Contains("detected abnormal "))
+                return;
             if (content.Contains("We have too many requests from your ip in the past 24h"))
             {
                 Console.WriteLine("We have too many requests from your ip in the past 24h");
                 Config1.Flooding();
-                webBrowser1.Navigate(url + i);
+                webBrowser1.Navigate(e.Url);
                 return;
             }
+            if (content.Contains("There is something wrong with your browser"))
+            {
+                Console.WriteLine("There is something wrong with your browser");
+                webBrowser1.Navigate("https://rarbg.to/torrents.php?category=1%3B4&page=" + textBox2.Text);
+                return;
+            }
+            if (e.Url.ToString().Contains("torrents.php?r="))
+            {
+                Console.WriteLine("first Redirecting");
+                webBrowser1.Navigate("https://rarbg.to/torrents.php?category=1%3B4&page="+textBox2.Text);
+                return;
+            }
+            Config1.BlockingQueue.Dequeue();
             pageProcessor.Process(webBrowser1.Url.ToString(),webBrowser1,textBox1.Text);
-            AsynObj asynObj = Config1.BlockingQueue.Dequeue();
+            AsynObj asynObj = Config1.BlockingQueue.Peek();
             webBrowser1.Navigate(asynObj.Url);
 
         }
