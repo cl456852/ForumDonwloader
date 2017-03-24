@@ -25,15 +25,13 @@ namespace WindowsFormsApplication1
 
         PageProcessor pageProcessor=new PageProcessor();
 
-        private const string listUrl = "https://rarbg.to/torrents.php?category=1%3B4&page=";
-
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             string content = webBrowser1.DocumentText;
             string coockieStr = webBrowser1.Document.Cookie;
-            if (String.IsNullOrEmpty(coockieStr))
+            if (!string.IsNullOrEmpty(coockieStr))
             {
-                Console.WriteLine(coockieStr);
+                Console.WriteLine("coockieStr:"+ coockieStr);
                 Config1.Cookie = coockieStr;
             }
             if (content.Contains("Please wait while we try to verify your browser"))
@@ -54,13 +52,21 @@ namespace WindowsFormsApplication1
             if (content.Contains("There is something wrong with your browser"))
             {
                 Console.WriteLine("There is something wrong with your browser");
-                webBrowser1.Navigate("https://rarbg.to/torrents.php?category=1%3B4&page=" + textBox2.Text);
+                AsynObj asynObj1 = Config1.BlockingQueue.Peek();
+                webBrowser1.Navigate(asynObj1.Url);
                 return;
             }
             if (e.Url.ToString().Contains("torrents.php?r="))
             {
                 Console.WriteLine("first Redirecting");
                 webBrowser1.Navigate("https://rarbg.to/torrents.php?category=1%3B4&page="+textBox2.Text);
+                return;
+            }
+            if (content.Contains("无法显示此页"))
+            {
+                Console.WriteLine("无法显示此页");
+                AsynObj asynObj1 = Config1.BlockingQueue.Peek();
+                webBrowser1.Navigate(asynObj1.Url);
                 return;
             }
             Config1.BlockingQueue.Dequeue();
@@ -90,15 +96,13 @@ namespace WindowsFormsApplication1
             for (int i = Convert.ToInt32(textBox2.Text); i <= Convert.ToInt32(textBox3.Text); i++)
             {
                 AsynObj asynObj = new AsynObj();
-                asynObj.Url = listUrl + i;
+                asynObj.Url =string.Format( textBox4.Text , i);
                 Config1.BlockingQueue.Enqueue(asynObj);
             }
-            AsynObj asynObj1 = Config1.BlockingQueue.Dequeue();
+            AsynObj asynObj1 = Config1.BlockingQueue.Peek();
             webBrowser1.Navigate(asynObj1.Url);
         }
 
-
-        private string url = "https://rarbg.to/torrents.php?category=1%3B4&page=";
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {

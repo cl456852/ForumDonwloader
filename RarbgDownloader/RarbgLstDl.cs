@@ -17,10 +17,6 @@ namespace RarbgDownloader
         public override void Download(object obj)
         {
             AsynObj o = (AsynObj)obj;
-
-
-
-       
                 string content = DlTool.GetHtml(o.Url, DlConfig.useProxy);
                 if (content == "")
                     return;

@@ -103,6 +103,10 @@ namespace Framework.tool
 
         public static void SaveFile(string content, string fileName)
         {
+            if (!Directory.Exists(Path.GetDirectoryName(fileName)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(fileName));
+            }
             fileName = fileName.Replace("%20", "").Replace("%2C", "").Replace("%22","").Replace("*","");
             //实例化一个文件流--->与写入文件相关联
             FileStream fs = new FileStream(fileName, FileMode.Create);
@@ -159,7 +163,7 @@ namespace Framework.tool
 //                    cookieContainer.Add(wQnP98Kj);
 //                    cookieContainer.Add(wQnP98Kj1);
                     request = (HttpWebRequest)WebRequest.Create(url);
-                    request.Headers.Add("Cookie:",Config1.Cookie);
+                    request.Headers.Add("Cookie", cookieStr);
                   //  request.CookieContainer = cookieContainer;
                     request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36";
                     request.Timeout = 15000;

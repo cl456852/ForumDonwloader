@@ -18,11 +18,11 @@ namespace WindowsFormsApplication1
 
         public void Process(string url, WebBrowser webBrowser, string path)
         {
-            var regex = new Regex("href=\"/torrent/.*?\"");
-            var content = webBrowser.DocumentText;
+
             if (url.Contains("page="))
             {
-                DlTool.SaveFile(content,Path.Combine( Config1.ValidePath(url)));
+                var content = webBrowser.DocumentText.Split(new string[] { "<div id=\"pager_links\">Pages:" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                DlTool.SaveFile(content,Path.Combine(path, Config1.ValidePath(url)+".htm"));
                 var mc = regex.Matches(content);
                 foreach (Match m in mc)
                     if (!m.Value.Contains("#comments") &&
@@ -52,23 +52,22 @@ namespace WindowsFormsApplication1
                 foreach (Match m in genresMatches)
                     genreStr += m.Value.Replace("search=", "").Replace("\"", "").ToLower().Replace("+", " ") + ",";
             }
-            if (check1(url.Substring(url.LastIndexOf('=') + 1).ToLower()))
-            {
-                path = Path.Combine(path, genreStr + "$$" + url.Substring(url.LastIndexOf('=') + 1)).Replace("%22", "");
-            }
-            else if (!Check2(url.Substring(url.LastIndexOf('=') + 1).ToLower()))
+            if (!Check2(url.Substring(url.LastIndexOf('=') + 1).ToLower()))
             {
                 path =
                     Path.Combine(path, "notok", genreStr + "$$" + url.Substring(url.LastIndexOf('=') + 1))
                         .Replace("%22", "");
             }
+            else if (check1(url.Substring(url.LastIndexOf('=') + 1).ToLower()))
+            {
+                path = Path.Combine(path, genreStr + "$$" + url.Substring(url.LastIndexOf('=') + 1)).Replace("%22", "");
+            }
+
             else
             {
                 path = Path.Combine(path, "unknown", url.Substring(url.LastIndexOf('=') + 1)).Replace("%22", "");
             }
             path = path.Replace("%20", " ").Replace("%2C", " ");
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
             if (File.Exists(path))
             {
                 path = Path.Combine(Path.GetDirectoryName(path), "duplicateName", Path.GetFileNameWithoutExtension(path) + "(" + System.Guid.NewGuid().ToString().Substring(0, 4) + ").torrent");

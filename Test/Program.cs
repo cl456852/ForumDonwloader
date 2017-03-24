@@ -19,9 +19,22 @@ namespace Framework.tool
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.webBrowserTest();
+            //p.webBrowserTest();
+            p.m1();
         }
+        public void m1()
+        {
+            int i=10;
+            m2(i);
+            Console.Write(i);
+            Console.Read();
+         }
 
+        public void m2(int i)
+        {
+            i= 9;
+
+        }
         void test()
         {
             DlTool dt = new DlTool();
