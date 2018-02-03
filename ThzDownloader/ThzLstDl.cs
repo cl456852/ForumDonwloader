@@ -18,7 +18,7 @@ namespace ThzDownloader
             AsynObj o = (AsynObj)obj;
 
 
-            string content = DownloadTool.GetHtml(o.Url, true,Common.CreateHttpWebRequest(o.Url));
+            string content = DownloadTool.GetHtml(o.Url, false,Common.CreateHttpWebRequest(o.Url));
             if (content != "")
             {
                 //string[] contents = content.Split(new string[] { "<td align=\"center\">" }, StringSplitOptions.RemoveEmptyEntries);

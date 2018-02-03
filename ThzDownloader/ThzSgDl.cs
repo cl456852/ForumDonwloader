@@ -29,7 +29,7 @@ namespace ThzDownloader
                         continue;
                    
                     string path= Path.Combine(o.Path, DlTool.ReplaceUrl( nameRegex1.Match(nameRegex.Match(thread).Value).Value))+".htm";
-                    string link = "http://taohuabt.info/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
+                    string link = "http://thzvv.com/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
                     ThreadPool.QueueUserWorkItem(new ThzSgDl().work, new AsynObj(path, link));
                     
 
@@ -44,14 +44,14 @@ namespace ThzDownloader
         void work(Object obj)
         {
             AsynObj asycObj = (AsynObj)obj;
-            string content = DownloadTool.GetHtml(asycObj.Url, true, Common.CreateHttpWebRequest(asycObj.Url));
+            string content = DownloadTool.GetHtml(asycObj.Url, false, Common.CreateHttpWebRequest(asycObj.Url));
             DlTool.SaveFile(content, asycObj.Path);
             MatchCollection torrentMatch= torrentLinkRegex.Matches(content);
             if (torrentMatch.Count > 0)
             {
                 string[] strs = torrentMatch[torrentMatch.Count - 1].Value.Split('"');
-                string url = "http://taohuabt.info/" + strs[0].Replace("&amp", "");
-                string torrentContent = DownloadTool.GetHtml(url, true, Common.CreateHttpWebRequest(url));
+                string url = "http://thzvv.com/" + strs[0].Replace("&amp", "");
+                string torrentContent = DownloadTool.GetHtml(url, false, Common.CreateHttpWebRequest(url));
                 DlTool.SaveFile(torrentContent, asycObj.Path + ".htm");
             }
             else

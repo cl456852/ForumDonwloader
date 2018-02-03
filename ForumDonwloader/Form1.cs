@@ -19,6 +19,8 @@ using Sis001Downloader;
 using JavBusDownloader;
 using AkibaOnlineDownloader;
 using ThzDownloader;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ForumDonwloader
 {
@@ -76,8 +78,21 @@ namespace ForumDonwloader
             
         }
 
+        internal class AcceptAllCertificatePolicy : ICertificatePolicy
+        {
+            public AcceptAllCertificatePolicy()
+            {
+            }
+
+            public bool CheckValidationResult(ServicePoint sPoint, X509Certificate cert, WebRequest wRequest, int certProb)
+            {
+                return true;
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
+            ServicePointManager.CertificatePolicy = new AcceptAllCertificatePolicy();
             init();
             IListPageDownloader lpd = new JavBusDl();
             for (int i = start; i <= end; i++)

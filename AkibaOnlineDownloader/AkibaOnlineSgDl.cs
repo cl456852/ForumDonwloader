@@ -38,7 +38,7 @@ namespace AkibaOnlineDownloader
          
                 HttpWebRequest downloadParam = (HttpWebRequest)WebRequest.Create(Config1.EMPTY_URL);
                 downloadParam.Host = "www.akiba-online.com";
-                string content = NewDlTool.GetHtml(asycObj.Url, true, downloadParam);
+                string content = NewDlTool.GetHtml(asycObj.Url, AkibaUtils.GenerateRequestParam());
                 string name = nameRegex.Match(content).Value.Replace("<title>", "").Replace("</title>", "");
                 string path = Path.Combine(asycObj.Path, Config1.ValidePath( name) + ".htm");
                 MatchCollection mc = torrentRegex.Matches(content);

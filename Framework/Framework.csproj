@@ -45,6 +45,7 @@
     <Compile Include="abs\AbsSgDl.cs" />
     <Compile Include="abs\AbstractFactory.cs" />
     <Compile Include="BlockingQueue.cs" />
+    <Compile Include="BO\RequestParam.cs" />
     <Compile Include="interf\IContentDownloader.cs" />
     <Compile Include="interf\IListPageDownloader.cs" />
     <Compile Include="interf\ISinglePageDonwloader.cs" />

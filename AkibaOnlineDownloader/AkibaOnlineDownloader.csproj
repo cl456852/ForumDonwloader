@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AkibaOnlineDl.cs" />
     <Compile Include="AkibaOnlineSgDl.cs" />
+    <Compile Include="AkibaUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

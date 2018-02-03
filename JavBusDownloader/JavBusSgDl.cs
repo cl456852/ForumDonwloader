@@ -38,12 +38,12 @@ namespace JavBusDownloader
             AsynObj asycObj = (AsynObj)obj;
             HttpWebRequest downloadParam = (HttpWebRequest)WebRequest.Create(Config1.EMPTY_URL);
             downloadParam.Host = "www.akiba-online.com";
-            string content = NewDlTool.GetHtml(asycObj.Url, true, downloadParam);
+            string content = NewDlTool.GetHtml(asycObj.Url, JavBusUtils.GenerateRequestParam());
             DlTool.SaveFile(content, asycObj.Path);
             string gid = gidRegex.Match(content).Value.Replace("var gid = ","").Replace(";","");
             string img = imgRegex.Match(content).Value.Replace("var img = '", "").Replace("';", "");
             string link = "https://www.javbus.com/ajax/uncledatoolsbyajax.php?gid=" + gid + "&lang=zh&img=" + img + "&uc=0&floor=900";
-            string magnetContent = NewDlTool.GetHtml(link, true, downloadParam);
+            string magnetContent = NewDlTool.GetHtml(link, JavBusUtils.GenerateRequestParam());
             DlTool.SaveFile(magnetContent, asycObj.Path + "_magenet");
         }
     }

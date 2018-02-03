@@ -1,4 +1,5 @@
 ﻿using Framework.abs;
+using Framework.BO;
 using Framework.tool;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace JavBusDownloader
             AsynObj o = (AsynObj)obj;
 
 
-            string content = Sis001DlTool.GetHtml(o.Url, true, "GB2312");
+            string content = NewDlTool.GetHtml(o.Url, JavBusUtils.GenerateRequestParam());
             if (content != "")
             {
                 if (o.Path != null)

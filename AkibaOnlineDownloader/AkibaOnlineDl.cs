@@ -19,7 +19,7 @@ namespace AkibaOnlineDownloader
 
             HttpWebRequest downloadParam = (HttpWebRequest)WebRequest.Create(Config1.EMPTY_URL);
             downloadParam.Host = "www.akiba-online.com";
-            string content = NewDlTool.GetHtml(o.Url, true, downloadParam);
+            string content = NewDlTool.GetHtml(o.Url, AkibaUtils.GenerateRequestParam());
             if (content != "")
             {
                 if (o.Path != null)

@@ -30,7 +30,7 @@ namespace Framework.tool
            
 
                     request.Referer = "http://taohuabt.info/forum.php";
-                    request.Host = "taohuabt.info";
+                    request.Host = "thzvv.com";
 
                     request.CookieContainer = Config1.coockieContainer;
                     request.UserAgent = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36";

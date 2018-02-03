@@ -53,7 +53,7 @@ namespace Framework.tool
                     if (useProxy)
                     {
 
-                        WebProxy proxy = new WebProxy("127.0.0.1", 8087);
+                        WebProxy proxy = new WebProxy("127.0.0.1", 1080);
                         request.Proxy = proxy;
                     }
                     response = (HttpWebResponse)request.GetResponse();

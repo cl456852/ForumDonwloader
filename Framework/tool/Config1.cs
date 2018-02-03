@@ -164,7 +164,7 @@ namespace Framework.tool
             string Cookiesstr = string.Empty;
 
             string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=QVNVUzoxMTExMTFh";
-            string LoginUrl = "http://router.asus.com/login.cgi";
+            string LoginUrl = "http://192.168.50.1/login.cgi";
             request = (HttpWebRequest)WebRequest.Create(LoginUrl);//实例化web访问类   
             request.Method = "POST";//数据提交方式为POST   
             //模拟头   
@@ -190,7 +190,7 @@ namespace Framework.tool
             StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
             string content = sr.ReadToEnd();
             response.Close();
-            gethost = "http://router.asus.com/start_apply2.htm";
+            gethost = "http://192.168.50.1/start_apply2.htm";
 
            
             request = (HttpWebRequest)WebRequest.Create(gethost);
@@ -416,7 +416,7 @@ namespace Framework.tool
             string Cookiesstr = string.Empty;
 
             string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=QVNVUzoxMTExMTFh";
-            string LoginUrl = "http://router.asus.com/login.cgi";
+            string LoginUrl = "http://192.168.50.1/login.cgi";
             request = (HttpWebRequest)WebRequest.Create(LoginUrl);//实例化web访问类   
             request.Method = "POST";//数据提交方式为POST   
             //模拟头   
@@ -442,7 +442,7 @@ namespace Framework.tool
             StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
             string content = sr.ReadToEnd();
             response.Close();
-            gethost = "http://router.asus.com/ajax_status.xml";
+            gethost = "http://192.168.50.1/ajax_status.xml";
            
             request = (HttpWebRequest)WebRequest.Create(gethost);
             request.Method = "POST";

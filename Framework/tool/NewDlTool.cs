@@ -7,13 +7,14 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
+using Framework.BO;
 
 namespace Framework.tool
 {
     public class NewDlTool
     {
 
-        public static string GetHtml(string url, bool useProxy, HttpWebRequest downloadParam)
+        public static string GetHtml(string url,  RequestParam requestParam)
         {
             ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;  
             string str = string.Empty;
@@ -28,33 +29,18 @@ namespace Framework.tool
                 try
                 {
                     Config1.mre.WaitOne();
-                    CookieContainer cookieContainer = new CookieContainer();
-                    //Cookie vDVPaqSe = new Cookie("vDVPaqSe", "r9jSB2Wk", "/", "rarbg.to");
-                    //Cookie lastVisit = new Cookie("LastVisit", Config1.getLastVisit(), "/", "rarbg.to");
-                    //Cookie __utma = new Cookie("__utma", "9515318.860353583.1429342721.1449335760.1449670802.1", "/", ".rarbg.to");
-                    //Cookie __utmb = new Cookie("__utmb", "9515318.23.10.1449670802", "/", ".rarbg.to");
-                    //Cookie __utmc = new Cookie("__utmc", "9515318", "/", ".rarbg.to");
-                    //Cookie __utmz = new Cookie("__utmz", "9515318.1447862416.86.2.utmcsr=rarbg.com|utmccn=(referral)|utmcmd=referral|utmcct=/download.php", "/", ".rarbg.to");
-                    //Cookie __utmt = new Cookie("__utmt", "1", "/", ".rarbg.to");
-                    //cookieContainer.Add(vDVPaqSe);
-                    //cookieContainer.Add(lastVisit);
-                    //// cookieContainer.Add(bSbTZF2j);
-                    //cookieContainer.Add(__utma);
-                    //cookieContainer.Add(__utmb);
-                    //cookieContainer.Add(__utmc);
-                    //cookieContainer.Add(__utmz);
-                    //cookieContainer.Add(__utmt);
                     request = (HttpWebRequest)WebRequest.Create(url);
-                    request.CookieContainer = cookieContainer;
+
+                    request.Headers.Add("cookie",requestParam.Cookie);
                     request.UserAgent = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36";
                     request.Timeout = 15000;
-                    request.KeepAlive = false;
-                    request.Referer = "http://www.javbus.com/QRDD-004";
+                    request.KeepAlive = true;
+                    request.Referer = requestParam.Referer;
                     //  request.SendChunked = true;
                     request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
                     //   request.TransferEncoding = "gzip,deflate,sdch";
-                    request.Host = downloadParam.Host;
-                    if (useProxy)
+                    request.Host = requestParam.Host;
+                    if (requestParam.IsUseProxy)
                     {
 
                         WebProxy proxy = new WebProxy("127.0.0.1", 8087);
