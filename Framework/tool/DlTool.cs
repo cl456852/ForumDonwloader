@@ -241,7 +241,13 @@ namespace Framework.tool
 
         public static string ReplaceUrl(string url)
         {
-            return url.Replace(">", "").Replace("</a", "").Replace('/', '_').Replace(":", "^").Replace("?", "wenhao");
+            string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+
+            foreach (char c in invalid)
+            {
+                url = url.Replace(c.ToString(), "");
+            }
+            return url;
         }
     }
 }

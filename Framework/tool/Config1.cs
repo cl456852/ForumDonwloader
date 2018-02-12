@@ -465,6 +465,8 @@ namespace Framework.tool
             return false;
         }
 
+        public static Dictionary<String, AsynObj> dictionary = new Dictionary<String, AsynObj>();
+
         public static string ValidePath(string path)
         {
             return path.Replace('/', '_').Replace(":", "^").Replace("?", "_").Replace('\\','_').Replace("|", "");

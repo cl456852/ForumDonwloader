@@ -8,13 +8,65 @@ using RarbgDownloader;
 
 namespace WindowsFormsApplication1
 {
-    public class PageProcessor
+    public class PageProcessor:IPageProcessor
     {
         Regex regex = new Regex("href=\"/torrent/.*?\"");
         Regex torrentRegex = new Regex(@"download.php\?id=.*?\.torrent");
         Regex genresRegex = new Regex(@"Genres.*</a>");
         Regex genresRegex1 = new Regex("search=.*?\"");
         Regex releaseDateRegex = new Regex("\"releaseDate\">.*</td></tr>");
+
+        IPageProcessor pageProcessor;
+
+        public void NavigateHandle(WebBrowser webBrowser1, WebBrowserDocumentCompletedEventArgs e, string path)
+        {
+            string content = webBrowser1.DocumentText;
+            string coockieStr = webBrowser1.Document.Cookie;
+            if (!string.IsNullOrEmpty(coockieStr))
+            {
+                Console.WriteLine("coockieStr:" + coockieStr);
+                Config1.Cookie = coockieStr;
+            }
+            if (content.Contains("Please wait while we try to verify your browser"))
+            {
+                Console.WriteLine("Please wait while we try to verify your browser");
+                //webBrowser1.Navigate(url + i);
+                return;
+            }
+            if (content.Contains("detected abnormal "))
+                return;
+            if (content.Contains("We have too many requests from your ip in the past 24h"))
+            {
+                Console.WriteLine("We have too many requests from your ip in the past 24h");
+                Config1.Flooding();
+                webBrowser1.Navigate(e.Url);
+                return;
+            }
+            if (content.Contains("There is something wrong with your browser"))
+            {
+                Console.WriteLine("There is something wrong with your browser");
+                AsynObj asynObj1 = Config1.BlockingQueue.Peek();
+                webBrowser1.Navigate(asynObj1.Url);
+                return;
+            }
+            if (e.Url.ToString().Contains("torrents.php?r="))
+            {
+                Console.WriteLine("first Redirecting");
+                webBrowser1.Navigate("https://rarbg.to/torrents.php?category=1%3B4&page=" + path);
+                return;
+            }
+            if (content.Contains("无法显示此页"))
+            {
+                Console.WriteLine("无法显示此页");
+                AsynObj asynObj1 = Config1.BlockingQueue.Peek();
+                webBrowser1.Navigate(asynObj1.Url);
+                return;
+            }
+            Config1.BlockingQueue.Dequeue();
+            Process(webBrowser1.Url.ToString(), webBrowser1, path);
+            AsynObj asynObj = Config1.BlockingQueue.Peek();
+            webBrowser1.Navigate(asynObj.Url);
+        }
 
         public void Process(string url, WebBrowser webBrowser, string path)
         {

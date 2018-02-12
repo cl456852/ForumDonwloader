@@ -20,7 +20,7 @@ namespace Framework.tool
         {
             Program p = new Program();
             //p.webBrowserTest();
-            p.m1();
+            p.PathRepladeTest();
         }
         public void m1()
         {
@@ -309,6 +309,14 @@ namespace Framework.tool
         {
             Regex regex = new Regex("href=\"/torrent/.*?\"");
 
+        }
+
+
+        void PathRepladeTest()
+        {
+            string path = @"D:\test6\sisUnknown\sisUnknown\(BAZOOKA)(MDB-797)一度入ったら常連確定！激エロ巨乳4人娘が営むハレンチ銭湯 尾上若葉 推川ゆうり 夏希みなみ 羽生ありさ size^^^4741.12.htm";
+            Console.WriteLine( DlTool.ReplaceUrl(path));
+            Console.Read();
         }
     }
 }
