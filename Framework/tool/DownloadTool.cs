@@ -27,11 +27,16 @@ namespace Framework.tool
                 try
                 {
                     Config1.mre.WaitOne();
-           
 
-                    request.Referer = "http://taohuabt.info/forum.php";
-                    request.Host = "thzvv.com";
 
+                    request.Referer = "http://vipthz.com/forum-220-1.html";
+                    request.Host = "vipthz.com";
+                    Uri uri = new Uri("http://vipthz.com");
+                    if (Config1.coockieContainer.Count == 0)
+                    {
+      
+                        Config1.coockieContainer.SetCookies(uri, "WMwh_2132_saltkey=GC7EC9V0; WMwh_2132_lastvisit=1520514817; UM_distinctid=16205fcd8019eb-0eadac0bf5afe6-3b3e5b06-1fa400-16205fcd802aa5; HstCfa2810755=1520518880374; HstCmu2810755=1520518880374; __dtsu=1EE70445365B005A655FD15302AB8826; WMwh_2132_sendmail=1; WMwh_2132_st_t=0%7C1521276770%7C04143df4e62fd4a0a4fd261325e78676; WMwh_2132_forum_lastvisit=D_220_1521276770; WMwh_2132_secqaa=603347.27afc8721cc13add8a; HstCla2810755=1521277233797; HstPn2810755=1; HstPt2810755=7; HstCnv2810755=2; HstCns2810755=2; yunsuo_session_verify=89deae51695e3dc549a978b7f54442ba; WMwh_2132_lastact=1521276829%09forum.php%09viewthread; WMwh_2132_viewid=tid_1786544; Hm_lvt_acfaccaaa388521ba7e29a5e15cf85ad=1520518879,1521277228; Hm_lpvt_acfaccaaa388521ba7e29a5e15cf85ad=1521277292; CNZZDATA1254190848=1123291068-1520515048-%7C1521276460");
+                    }
                     request.CookieContainer = Config1.coockieContainer;
                     request.UserAgent = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36";
                     request.Timeout = 15000;
@@ -46,6 +51,7 @@ namespace Framework.tool
                         request.Proxy = proxy;
                     }
                     response = (HttpWebResponse)request.GetResponse();
+                    Config1.coockieContainer.SetCookies(uri, response.Headers.Get("Set-Cookie"));
                     //Config1.setCoockies(new Uri("http://taohuabt.info"),response.Headers[HttpResponseHeader.SetCookie]);
                     Stream streamReceive = response.GetResponseStream();
                     Encoding encoding = Encoding.GetEncoding("utf-8");
@@ -112,6 +118,8 @@ namespace Framework.tool
                     request.KeepAlive = false;
                     request.Referer = downloadParam.Referer;
                     request.Host = downloadParam.Host;
+                    Uri uri = new Uri("vipthz.com");
+                    Config1.coockieContainer.SetCookies(uri, "WMwh_2132_saltkey=GC7EC9V0; WMwh_2132_lastvisit=1520514817; UM_distinctid=16205fcd8019eb-0eadac0bf5afe6-3b3e5b06-1fa400-16205fcd802aa5; HstCfa2810755=1520518880374; HstCmu2810755=1520518880374; __dtsu=1EE70445365B005A655FD15302AB8826; WMwh_2132_sendmail=1; WMwh_2132_st_t=0%7C1521276770%7C04143df4e62fd4a0a4fd261325e78676; WMwh_2132_forum_lastvisit=D_220_1521276770; WMwh_2132_secqaa=603347.27afc8721cc13add8a; HstCla2810755=1521277233797; HstPn2810755=1; HstPt2810755=7; HstCnv2810755=2; HstCns2810755=2; yunsuo_session_verify=89deae51695e3dc549a978b7f54442ba; WMwh_2132_lastact=1521276829%09forum.php%09viewthread; WMwh_2132_viewid=tid_1786544; Hm_lvt_acfaccaaa388521ba7e29a5e15cf85ad=1520518879,1521277228; Hm_lpvt_acfaccaaa388521ba7e29a5e15cf85ad=1521277292; CNZZDATA1254190848=1123291068-1520515048-%7C1521276460");
                     if (useProxy)
                     {
 

@@ -29,7 +29,7 @@ namespace ThzDownloader
                         continue;
                    
                     string path= Path.Combine(o.Path, DlTool.ReplaceUrl( nameRegex1.Match(nameRegex.Match(thread).Value).Value))+".htm";
-                    string link = "http://thzvv.com/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
+                    string link = "http://vipthz.com/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
                     ThreadPool.QueueUserWorkItem(new ThzSgDl().work, new AsynObj(path, link));
                     
 
