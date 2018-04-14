@@ -101,6 +101,18 @@ namespace WindowsFormsApplication1
             start();
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            pageProcessor = new JavtorrentProcessor();
+            start();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            pageProcessor = new YouivProcessor();
+            start();
+        }
+
         
     }
 }
