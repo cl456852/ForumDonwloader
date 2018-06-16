@@ -38,6 +38,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // webBrowser1
@@ -63,15 +64,15 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(958, 12);
+            this.textBox1.Location = new System.Drawing.Point(1096, 8);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "d:\\test6";
+            this.textBox1.Text = "c:\\test6";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(1097, 12);
+            this.textBox2.Location = new System.Drawing.Point(1212, 4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(50, 21);
             this.textBox2.TabIndex = 4;
@@ -79,7 +80,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(1184, 8);
+            this.textBox3.Location = new System.Drawing.Point(1268, 6);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(47, 21);
             this.textBox3.TabIndex = 5;
@@ -91,7 +92,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(478, 21);
             this.textBox4.TabIndex = 6;
-            this.textBox4.Text = "https://youiv.tv/u15-279-{0}.html";
+            this.textBox4.Text = "http://168x.me/forum-37-{0}.html";
             // 
             // button1
             // 
@@ -134,11 +135,22 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(986, 6);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 11;
+            this.button6.Text = "168x";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1350, 436);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -168,6 +180,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
 

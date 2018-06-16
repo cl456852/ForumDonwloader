@@ -58,7 +58,7 @@ namespace WindowsFormsApplication1
                             if (thread.Contains("桃花族论坛"))
                                 continue;
 
-                            string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex1.Match(nameRegex.Match(thread).Value).Value)) + ".htm";
+                            string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex1.Match(nameRegex.Match(thread).Value).Value)).Replace(">","").Replace("</a","") + ".htm";
                             string link = "http://taohuabt.cc/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
 
                             AsynObj o = new AsynObj();

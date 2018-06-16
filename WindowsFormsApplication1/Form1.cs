@@ -113,6 +113,12 @@ namespace WindowsFormsApplication1
             start();
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            pageProcessor = new _168xProcessor();
+            start();
+        }
+
         
     }
 }
