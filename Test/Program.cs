@@ -20,7 +20,8 @@ namespace Framework.tool
         {
             Program p = new Program();
             //p.webBrowserTest();
-            p.PathRepladeTest();
+            p.ShowProcessInfo();
+            Console.Read();
         }
         public void m1()
         {
@@ -317,6 +318,36 @@ namespace Framework.tool
             string path = @"D:\test6\sisUnknown\sisUnknown\(BAZOOKA)(MDB-797)一度入ったら常連確定！激エロ巨乳4人娘が営むハレンチ銭湯 尾上若葉 推川ゆうり 夏希みなみ 羽生ありさ size^^^4741.12.htm";
             Console.WriteLine( DlTool.ReplaceUrl(path));
             Console.Read();
+        }
+
+        public void ShowProcessInfo()
+        {
+            while (true)
+            {
+                Process[] processes = Process.GetProcesses();
+
+                foreach (Process p in processes)
+                {
+
+                    try
+                    {
+                        if (p.ProcessName.Contains("curl"))
+                        {
+                            Console.WriteLine(String.Format("{0} {1} {2} {3}", p.Id, p.ProcessName, p.BasePriority, p.StartTime));
+                            if ((DateTime.Now - p.StartTime).TotalSeconds > 30)
+                            {
+                                p.Kill();
+                                Console.WriteLine("curl killed");
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                Thread.Sleep(30000);
+            }
         }
     }
 }

@@ -39,7 +39,7 @@ namespace WindowsFormsApplication1
                 if (torrentMatch.Count > 0)
                 {
                     string[] strs = torrentMatch[torrentMatch.Count - 1].Value.Split('"');
-                    string url = "http://vipthz.com/" + strs[0].Replace("&amp", "");
+                    string url = "http://taohuabt.cc/" + strs[0].Replace("&amp", "");
                     AsynObj o = new AsynObj();
                     o.Url = url;
                     o.Path = path+ ".htm";
@@ -59,7 +59,7 @@ namespace WindowsFormsApplication1
                                 continue;
 
                             string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex1.Match(nameRegex.Match(thread).Value).Value)) + ".htm";
-                            string link = "http://vipthz.com/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
+                            string link = "http://taohuabt.cc/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
 
                             AsynObj o = new AsynObj();
                             o.Url = link;

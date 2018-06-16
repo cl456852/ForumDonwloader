@@ -36,7 +36,7 @@ namespace WindowsFormsApplication1
                 if (!String.IsNullOrEmpty( value))
                 {
                     string torernt = idRegex.Match(gethtml).Value.Split(new string[] { "target=\"_blank\"", "</a>" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    string id = idRegex1.Match(torernt.ToUpper().Replace("-","")).Value;
+                    string id = idRegex1.Match(torernt.ToUpper()).Value.Replace("-","");
                     path = Path.Combine(path1, "[" + id + "]" + DlTool.ReplaceUrl(path) + ".htm");
                     DlTool.SaveFile(gethtml, path);
 
