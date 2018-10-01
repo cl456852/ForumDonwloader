@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -97,6 +98,7 @@ namespace WindowsFormsApplication1
 
         private void button3_Click_1(object sender, EventArgs e)
         {
+            Config();
             pageProcessor = new ThzPageProcessor();
             start();
         }
@@ -115,6 +117,7 @@ namespace WindowsFormsApplication1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            Config();
             pageProcessor = new _168xProcessor();
             start();
         }
@@ -123,6 +126,16 @@ namespace WindowsFormsApplication1
         {
             pageProcessor = new BailuProcessor();
             start();
+        }
+
+        void Config()
+        {
+            Util.domain = new Regex("http:\\/\\/.*\\/").Match(textBox4.Text).Value;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            webBrowser1.ScriptErrorsSuppressed = true;
         }
     }
 }

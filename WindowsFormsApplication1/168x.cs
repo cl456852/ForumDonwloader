@@ -43,7 +43,7 @@ namespace WindowsFormsApplication1
                             continue;
 
                         string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex.Match(thread).Value.Replace("s xst\">", "").Replace("</a>",""))) + ".htm";
-                        string link = "http://168x.me/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
+                        string link =Util.domain + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
                         if (link.Contains("thread-12088-1-1"))
                             continue;
                         AsynObj o = new AsynObj();

@@ -69,7 +69,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "c:\\test6";
+            this.textBox1.Text = "d:\\test6";
             // 
             // textBox2
             // 
@@ -175,6 +175,7 @@
             this.Controls.Add(this.webBrowser1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
