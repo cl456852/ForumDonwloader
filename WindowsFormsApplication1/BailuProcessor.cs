@@ -13,8 +13,8 @@ namespace WindowsFormsApplication1
 
     public class BailuProcessor : IPageProcessor
     {
-        Regex nameRegex = new Regex("s xst\">.*</a>");
-        Regex threadRegex = new Regex("\"thread.*html\"");
+        Regex nameRegex = new Regex("atarget\\(this\\)\" title=\".*\">");
+        Regex threadRegex = new Regex("href=\".*\" style=\"font-weight");
         public void NavigateHandle(WebBrowser webBrowser1, WebBrowserDocumentCompletedEventArgs e, string path1)
         {
             System.IO.StreamReader getReader = new System.IO.StreamReader(webBrowser1.DocumentStream);
@@ -39,14 +39,16 @@ namespace WindowsFormsApplication1
                 DlTool.SaveFile(gethtml, Path.Combine(path1, DlTool.ReplaceUrl(e.Url.ToString()) + ".htm"));
                 try
                 {
-                    string[] threads = gethtml.Split(new string[] { "新窗口打开" }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] threads = gethtml.Split(new string[] { "喜欢:" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string thread in threads)
                     {
-                        if (thread.Contains("亚洲有码原创"))
+  
+                        Console.WriteLine(thread);
+                        string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex.Match(thread).Value.Replace("atarget(this)\" title=\"", "").Replace("\">", ""))) + ".htm";
+                        MatchCollection mc = threadRegex.Matches(thread);
+                        if (mc.Count == 0)
                             continue;
-
-                        string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex.Match(thread).Value.Replace("s xst\">", "").Replace("</a>", ""))) + ".htm";
-                        string link = "http://www.474hd.com/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
+                        string link = Util.domain + mc[0].Value.Replace("href=\"", "").Replace("\" style=\"font-weight","");
                         AsynObj o = new AsynObj();
                         o.Url = link;
                         o.Path = path;

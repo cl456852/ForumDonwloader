@@ -85,7 +85,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(47, 21);
             this.textBox3.TabIndex = 5;
-            this.textBox3.Text = "2";
+            this.textBox3.Text = "1";
             // 
             // textBox4
             // 
@@ -93,7 +93,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(478, 21);
             this.textBox4.TabIndex = 6;
-            this.textBox4.Text = "http://168x.me/forum-37-{0}.html";
+            this.textBox4.Text = "http://www.100aa.pw/forum-2-{0}.html";
             // 
             // button1
             // 

@@ -124,6 +124,7 @@ namespace WindowsFormsApplication1
 
         private void button7_Click(object sender, EventArgs e)
         {
+            Config();
             pageProcessor = new BailuProcessor();
             start();
         }
