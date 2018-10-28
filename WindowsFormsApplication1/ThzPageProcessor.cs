@@ -68,8 +68,11 @@ namespace WindowsFormsApplication1
                     AsynObj o = new AsynObj();
                     o.Url = url;
                     o.Path = path+ ".htm";
-                    Config1.dictionary.Add(url, o);
-                    Config1.BlockingQueue.Enqueue(o);
+                    if (!Config1.dictionary.ContainsKey(url))
+                    {
+                        Config1.dictionary.Add(url, o);
+                        Config1.BlockingQueue.Enqueue(o);
+                    }
                 }
             }
             else if (webBrowser1.Url.ToString().Contains("forum"))

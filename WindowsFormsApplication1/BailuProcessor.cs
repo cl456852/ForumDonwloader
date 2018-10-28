@@ -43,8 +43,8 @@ namespace WindowsFormsApplication1
                     foreach (string thread in threads)
                     {
   
-                        Console.WriteLine(thread);
-                        string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex.Match(thread).Value.Replace("atarget(this)\" title=\"", "").Replace("\">", ""))) + ".htm";
+                        
+                        string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex.Match(thread).Value.Replace("atarget(this)\" title=\"", "").Replace("\">", "").Replace("\" class=\"z",""))) + ".htm";
                         MatchCollection mc = threadRegex.Matches(thread);
                         if (mc.Count == 0)
                             continue;
