@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
     class JavtorrentProcessor:IPageProcessor
     {
         Regex listRegex = new Regex("<li>.*?</li>");
-        Regex threadRegex = new Regex("<li><a href=\"/iv/.*?/\">");
+        Regex threadRegex = new Regex("<a href=\"/censored/.*?/\">|<a href=\"/iv/.*?/\">");
         Regex nameRegex=new Regex("<span class=\"base-t\">.*?</span>");
         public void NavigateHandle(System.Windows.Forms.WebBrowser webBrowser1, System.Windows.Forms.WebBrowserDocumentCompletedEventArgs e, string path1)
         {
@@ -45,7 +45,7 @@ namespace WindowsFormsApplication1
                 {
                     string list = match.Value;
                     //<li><a href="/iv/143835/">
-                    string url = "http://javtorrent.re"+threadRegex.Match(list).Value.Replace("<li><a href=\"","").Replace("\">","");
+                    string url = "http://javtorrent.re"+threadRegex.Match(list).Value.Replace("<a href=\"","").Replace("\">","");
                     if (url == "http://javtorrent.re" || url == "http://javtorrent.re/")
                         continue;
                     string name = nameRegex.Match(list).Value.Replace("<span class=\"base-t\">", "").Replace("</span>","");
