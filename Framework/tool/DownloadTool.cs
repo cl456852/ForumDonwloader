@@ -29,13 +29,13 @@ namespace Framework.tool
                     Config1.mre.WaitOne();
 
 
-                    request.Referer = "http://vipthz.com/forum-220-1.html";
-                    request.Host = "vipthz.com";
-                    Uri uri = new Uri("http://vipthz.com");
+                    request.Referer = "http://thzu.net";
+                    request.Host = "thzu.net";
+                    Uri uri = new Uri("http://thzu.net");
                     if (Config1.coockieContainer.Count == 0)
                     {
       
-                        Config1.coockieContainer.SetCookies(uri, "WMwh_2132_saltkey=GC7EC9V0; WMwh_2132_lastvisit=1520514817; UM_distinctid=16205fcd8019eb-0eadac0bf5afe6-3b3e5b06-1fa400-16205fcd802aa5; HstCfa2810755=1520518880374; HstCmu2810755=1520518880374; __dtsu=1EE70445365B005A655FD15302AB8826; WMwh_2132_sendmail=1; WMwh_2132_st_t=0%7C1521276770%7C04143df4e62fd4a0a4fd261325e78676; WMwh_2132_forum_lastvisit=D_220_1521276770; WMwh_2132_secqaa=603347.27afc8721cc13add8a; HstCla2810755=1521277233797; HstPn2810755=1; HstPt2810755=7; HstCnv2810755=2; HstCns2810755=2; yunsuo_session_verify=89deae51695e3dc549a978b7f54442ba; WMwh_2132_lastact=1521276829%09forum.php%09viewthread; WMwh_2132_viewid=tid_1786544; Hm_lvt_acfaccaaa388521ba7e29a5e15cf85ad=1520518879,1521277228; Hm_lpvt_acfaccaaa388521ba7e29a5e15cf85ad=1521277292; CNZZDATA1254190848=1123291068-1520515048-%7C1521276460");
+                        Config1.coockieContainer.SetCookies(uri, "WMwh_2132_saltkey=r442Qqk4; WMwh_2132_lastvisit=1540701210; UM_distinctid=166b9345dc6ba-08685a8b1edee1-333b5602-1fa400-166b9345dc7790; Hm_lvt_acfaccaaa388521ba7e29a5e15cf85ad=1540705508,1540705511,1540705536,1540705588; HstCfa2810755=1540705725992; HstCmu2810755=1540705725992; HstCnv2810755=1; CNZZDATA1254190848=739211765-1540701508-%7C1540708736; WMwh_2132_st_t=0%7C1540708683%7Cff502671c14b9c9452336bb29a03dd3b; WMwh_2132_forum_lastvisit=D_220_1540708683; WMwh_2132_sendmail=1; yunsuo_session_verify=91bea48ba16a526add5b0de04ba0e3e2; WMwh_2132_lastact=1540708684%09misc.php%09secqaa; WMwh_2132_secqaa=272789.c3b5809e7c26fc0a69; Hm_lpvt_acfaccaaa388521ba7e29a5e15cf85ad=1540709381; HstCla2810755=1540709380725; HstPn2810755=11; HstPt2810755=11; HstCns2810755=2");
                     }
                     request.CookieContainer = Config1.coockieContainer;
                     request.UserAgent = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36";
@@ -118,8 +118,8 @@ namespace Framework.tool
                     request.KeepAlive = false;
                     request.Referer = downloadParam.Referer;
                     request.Host = downloadParam.Host;
-                    Uri uri = new Uri("vipthz.com");
-                    Config1.coockieContainer.SetCookies(uri, "WMwh_2132_saltkey=GC7EC9V0; WMwh_2132_lastvisit=1520514817; UM_distinctid=16205fcd8019eb-0eadac0bf5afe6-3b3e5b06-1fa400-16205fcd802aa5; HstCfa2810755=1520518880374; HstCmu2810755=1520518880374; __dtsu=1EE70445365B005A655FD15302AB8826; WMwh_2132_sendmail=1; WMwh_2132_st_t=0%7C1521276770%7C04143df4e62fd4a0a4fd261325e78676; WMwh_2132_forum_lastvisit=D_220_1521276770; WMwh_2132_secqaa=603347.27afc8721cc13add8a; HstCla2810755=1521277233797; HstPn2810755=1; HstPt2810755=7; HstCnv2810755=2; HstCns2810755=2; yunsuo_session_verify=89deae51695e3dc549a978b7f54442ba; WMwh_2132_lastact=1521276829%09forum.php%09viewthread; WMwh_2132_viewid=tid_1786544; Hm_lvt_acfaccaaa388521ba7e29a5e15cf85ad=1520518879,1521277228; Hm_lpvt_acfaccaaa388521ba7e29a5e15cf85ad=1521277292; CNZZDATA1254190848=1123291068-1520515048-%7C1521276460");
+                    Uri uri = new Uri("thzu.net");
+                    Config1.coockieContainer.SetCookies(uri, "WMwh_2132_saltkey=r442Qqk4; WMwh_2132_lastvisit=1540701210; UM_distinctid=166b9345dc6ba-08685a8b1edee1-333b5602-1fa400-166b9345dc7790; Hm_lvt_acfaccaaa388521ba7e29a5e15cf85ad=1540705508,1540705511,1540705536,1540705588; HstCfa2810755=1540705725992; HstCmu2810755=1540705725992; HstCnv2810755=1; CNZZDATA1254190848=739211765-1540701508-%7C1540708736; WMwh_2132_st_t=0%7C1540708683%7Cff502671c14b9c9452336bb29a03dd3b; WMwh_2132_forum_lastvisit=D_220_1540708683; WMwh_2132_sendmail=1; yunsuo_session_verify=91bea48ba16a526add5b0de04ba0e3e2; WMwh_2132_lastact=1540708684%09misc.php%09secqaa; WMwh_2132_secqaa=272789.c3b5809e7c26fc0a69; Hm_lpvt_acfaccaaa388521ba7e29a5e15cf85ad=1540709381; HstCla2810755=1540709380725; HstPn2810755=11; HstPt2810755=11; HstCns2810755=2");
                     if (useProxy)
                     {
 

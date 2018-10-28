@@ -29,7 +29,7 @@ namespace ThzDownloader
                         continue;
                    
                     string path= Path.Combine(o.Path, DlTool.ReplaceUrl( nameRegex1.Match(nameRegex.Match(thread).Value).Value))+".htm";
-                    string link = "http://vipthz.com/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
+                    string link = "http://thzu.net/" + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
                     ThreadPool.QueueUserWorkItem(new ThzSgDl().work, new AsynObj(path, link));
                     
 
@@ -50,7 +50,7 @@ namespace ThzDownloader
             if (torrentMatch.Count > 0)
             {
                 string[] strs = torrentMatch[torrentMatch.Count - 1].Value.Split('"');
-                string url = "http://thzvv.com/" + strs[0].Replace("&amp", "");
+                string url = "http://thzu.net/" + strs[0].Replace("&amp", "");
                 string torrentContent = DownloadTool.GetHtml(url, false, Common.CreateHttpWebRequest(url));
                 DlTool.SaveFile(torrentContent, asycObj.Path + ".htm");
             }
