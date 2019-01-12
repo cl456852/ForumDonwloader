@@ -30,8 +30,15 @@ namespace WindowsFormsApplication1
 
             if (webBrowser1.Url.ToString().Contains("thread"))
             {
-                string path = Config1.dictionary[webBrowser1.Url.ToString()].Path;
-                DlTool.SaveFile(gethtml, path);
+                try
+                {
+                    string path = Config1.dictionary[webBrowser1.Url.ToString()].Path;
+                    DlTool.SaveFile(gethtml, path);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(webBrowser1.Url.ToString() + "  can not find in dic");
+                }
 
             }
             else if (webBrowser1.Url.ToString().Contains("forum"))

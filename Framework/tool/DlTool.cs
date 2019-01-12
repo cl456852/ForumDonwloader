@@ -103,6 +103,10 @@ namespace Framework.tool
 
         public static void SaveFile(string content, string fileName)
         {
+            if (fileName.Length > 240)
+            {
+                fileName = fileName.Substring(0, 240)+".htm";
+            }
             if (!Directory.Exists(Path.GetDirectoryName(fileName)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(fileName));

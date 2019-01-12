@@ -131,7 +131,7 @@ namespace WindowsFormsApplication1
 
         void Config()
         {
-            Util.domain = new Regex("http:\\/\\/.*\\/").Match(textBox4.Text).Value;
+            Util.domain = new Regex("(http|https):\\/\\/.*\\/").Match(textBox4.Text).Value;
         }
 
         private void Form1_Load(object sender, EventArgs e)

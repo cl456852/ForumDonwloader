@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1
 
             Config1.BlockingQueue.Dequeue();
 
-            if (!webBrowser1.Url.ToString().Contains("category"))
+            if (!webBrowser1.Url.ToString().Contains("category")&& !webBrowser1.Url.ToString().Contains("?s="))
             {
                 string path = Config1.dictionary[webBrowser1.Url.ToString()].Path;
                 DlTool.SaveFile(gethtml, path);

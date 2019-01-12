@@ -13,7 +13,7 @@ namespace WindowsFormsApplication1
     {
         Regex idRegex1 = new Regex("[A-Z]{1,}-[0-9]{1,}|[A-Z]{1,}[0-9]{1,}|[A-Z]{1,}‐[0-9]{1,}");
         Regex theadRegex =new Regex("<a href=\"youiv-.*?class=\"z\">");
-        Regex idRegex=new Regex("<a href=\"forum.php\\?mod=attachment&.*? target=\"_blank\">.*?torrent</a>");
+        Regex idRegex=new Regex(">.*?torrent");
         public void NavigateHandle(System.Windows.Forms.WebBrowser webBrowser1, System.Windows.Forms.WebBrowserDocumentCompletedEventArgs e, string path1)
         {
             System.IO.StreamReader getReader = new System.IO.StreamReader(webBrowser1.DocumentStream);
@@ -23,6 +23,12 @@ namespace WindowsFormsApplication1
             {
                 Console.WriteLine("500 Internal Privoxy Error TRY AGAIN");
                 webBrowser1.Navigate(e.Url);
+                return;
+            }
+            if (!e.Url.ToString().Contains("youiv.tv/youiv") && !e.Url.ToString().Contains("youiv.tv/u15-279"))
+            {
+                Console.WriteLine("Please wait while we try to verify your browser");
+                //webBrowser1.Navigate(url + i);
                 return;
             }
 
@@ -35,8 +41,8 @@ namespace WindowsFormsApplication1
                 string value = idRegex.Match(gethtml).Value;
                 if (!String.IsNullOrEmpty( value))
                 {
-                    string torernt = idRegex.Match(gethtml).Value.Split(new string[] { "target=\"_blank\"", "</a>" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    string id = idRegex1.Match(torernt.ToUpper()).Value.Replace("-","");
+                    
+                    string id = value.Replace("-","").Replace(">","").Replace(".torrent","");
                     path = Path.Combine(path1, "[" + id + "]" + DlTool.ReplaceUrl(path) + ".htm");
                     DlTool.SaveFile(gethtml, path);
 

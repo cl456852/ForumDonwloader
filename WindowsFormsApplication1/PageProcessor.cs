@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Framework.tool;
+using RarbgDownloader;
+using System;
 using System.Collections;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Framework.tool;
-using RarbgDownloader;
 
 namespace WindowsFormsApplication1
 {
