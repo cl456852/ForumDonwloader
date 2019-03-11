@@ -44,13 +44,16 @@ namespace WindowsFormsApplication1
 
                         string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex.Match(thread).Value.Replace("s xst\">", "").Replace("</a>",""))) + ".htm";
                         string link =Util.domain + threadRegex.Matches(thread)[0].Value.Replace("\"", "");
-                        if (link.Contains("thread-12088-1-1")||link.Contains("thread-62622-1-1"))
-                            continue;
+                        //if (link.Contains("thread-12088-1-1")||link.Contains("thread-62622-1-1"))
+                        //    continue;
                         AsynObj o = new AsynObj();
                         o.Url = link;
                         o.Path = path;
-                        Config1.dictionary.Add(link, o);
-                        Config1.BlockingQueue.Enqueue(o);
+                        if (!Config1.dictionary.Keys.Contains(link))
+                        {
+                            Config1.dictionary.Add(link, o);
+                            Config1.BlockingQueue.Enqueue(o);
+                        }
                     }
                 }
                 catch (Exception ex)

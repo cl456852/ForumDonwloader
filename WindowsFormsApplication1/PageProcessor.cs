@@ -113,6 +113,7 @@ namespace WindowsFormsApplication1
             else if (check1(url.Substring(url.LastIndexOf('=') + 1).ToLower()))
             {
                 path = Path.Combine(path, genreStr + "$$" + url.Substring(url.LastIndexOf('=') + 1)).Replace("%22", "");
+                DlTool.downLoadFile(url, path, false, content, Config1.Cookie);
             }
 
             else
@@ -125,7 +126,7 @@ namespace WindowsFormsApplication1
                 path = Path.Combine(Path.GetDirectoryName(path), "duplicateName", Path.GetFileNameWithoutExtension(path) + "(" + System.Guid.NewGuid().ToString().Substring(0, 4) + ").torrent");
                 Console.WriteLine("duplicate filename: " + path);
             }
-            DlTool.downLoadFile(url,path,false,content,Config1.Cookie);
+            
         }
 
 

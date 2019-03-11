@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1
     public class BailuProcessor : IPageProcessor
     {
         Regex nameRegex = new Regex("atarget\\(this\\)\" title=\".*\">");
-        Regex threadRegex = new Regex("href=\".*\" style=\"font-weight");
+        Regex threadRegex = new Regex("href=\".*\" style=\"font-weight|href=\".*onclick");
         public void NavigateHandle(WebBrowser webBrowser1, WebBrowserDocumentCompletedEventArgs e, string path1)
         {
             System.IO.StreamReader getReader = new System.IO.StreamReader(webBrowser1.DocumentStream);
@@ -55,7 +55,7 @@ namespace WindowsFormsApplication1
                         MatchCollection mc = threadRegex.Matches(thread);
                         if (mc.Count == 0)
                             continue;
-                        string link = Util.domain + mc[0].Value.Replace("href=\"", "").Replace("\" style=\"font-weight","");
+                        string link = Util.domain + mc[mc.Count-1].Value.Replace("href=\"", "").Replace("\" style=\"font-weight","").Replace("onclick","").Replace(" ","").Replace("\"","");
                         AsynObj o = new AsynObj();
                         o.Url = link;
                         o.Path = path;
