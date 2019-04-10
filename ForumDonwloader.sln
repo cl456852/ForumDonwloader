@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumDonwloader", "ForumDonwloader\ForumDonwloader.csproj", "{13ADA6B7-3F48-43E1-8005-5C66ADC209E1}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThzDownloader", "ThzDownloader\ThzDownloader.csproj", "{233E5D1B-F9CA-4B69-BE2B-E2698ED84462}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{BC723166-9AA6-4E4A-A71E-483C91356DE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrowserDownloader", "BrowserDownloader\BrowserDownloader.csproj", "{C2296151-5300-49FE-BCC9-E8402D063C51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,8 +123,23 @@ Global
 		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BC723166-9AA6-4E4A-A71E-483C91356DE3}.Release|x86.ActiveCfg = Release|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Debug|x86.Build.0 = Debug|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Release|x86.ActiveCfg = Release|Any CPU
+		{C2296151-5300-49FE-BCC9-E8402D063C51}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {051D0591-B9B9-49F4-B0CE-0A6300C033B8}
 	EndGlobalSection
 EndGlobal
