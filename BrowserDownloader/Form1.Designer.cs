@@ -33,6 +33,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.LoadPic = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -77,11 +78,22 @@
             this.textBox4.TabIndex = 4;
             this.textBox4.Text = "1";
             // 
+            // LoadPic
+            // 
+            this.LoadPic.Location = new System.Drawing.Point(1065, 42);
+            this.LoadPic.Name = "LoadPic";
+            this.LoadPic.Size = new System.Drawing.Size(75, 23);
+            this.LoadPic.TabIndex = 5;
+            this.LoadPic.Text = "LoadPic";
+            this.LoadPic.UseVisualStyleBackColor = true;
+            this.LoadPic.Click += new System.EventHandler(this.LoadPic_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1152, 679);
+            this.Controls.Add(this.LoadPic);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
@@ -102,6 +114,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button LoadPic;
     }
 }
 

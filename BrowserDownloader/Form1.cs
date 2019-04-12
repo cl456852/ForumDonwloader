@@ -36,6 +36,9 @@ namespace BrowserDownloader
             Cef.Initialize(settings);
             // Create a browser component
             chromeBrowser = new ChromiumWebBrowser();
+            chromeBrowser.RequestHandler = new RequestHandler();
+
+
             chromeBrowser.DownloadHandler = downloadHandler;
      
             // Add it to the form and fill it to the form window.
@@ -51,7 +54,7 @@ namespace BrowserDownloader
 
         private void WebBrowserFrameLoadEnded(object sender, FrameLoadEndEventArgs e)
         {
-            
+
             if (e.Frame.IsMain)
             {
                 //chromeBrowser.ViewSource();
@@ -61,7 +64,7 @@ namespace BrowserDownloader
                     pageProcessor.NavigateHandle(chromeBrowser, CurrentAddress, textBox2.Text, html);
                 });
             }
-          
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -76,13 +79,14 @@ namespace BrowserDownloader
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //chromeBrowser.Load("https://rarbgprx.org/download.php?id=n2yfuli&h=693&f=Nubiles.19.04.11.Rachel.Adjani.Deeper.XXX.1080p.MP4-KTR-[rarbg.to].torrent");
             pageProcessor = new PageProcessor();
             start();
         }
 
         private void start()
         {
-            downloadHandler.Path = textBox2.Text;
+           // downloadHandler.Path = textBox2.Text;
             for (int i = Convert.ToInt32(textBox3.Text); i <= Convert.ToInt32(textBox4.Text); i++)
             {
                 AsynObj asynObj = new AsynObj();
@@ -93,5 +97,9 @@ namespace BrowserDownloader
             chromeBrowser.Load(asynObj1.Url);
         }
 
+        private void LoadPic_Click(object sender, EventArgs e)
+        {
+            RequestHandler.ifLoadPic = !RequestHandler.ifLoadPic;
+        }
     }
 }

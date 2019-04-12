@@ -1,4 +1,5 @@
 ﻿
+using CefSharp.Example.Handlers;
 using CefSharp.WinForms;
 using Framework.tool;
 using RarbgDownloader;
@@ -18,14 +19,21 @@ namespace BrowserDownloader
         Regex genresRegex1 = new Regex("search=.*?\"");
         Regex releaseDateRegex = new Regex("\"releaseDate\">.*</td></tr>");
 
-        IPageProcessor pageProcessor;
         ChromiumWebBrowser chromeBrowser;
 
 
         public void NavigateHandle(ChromiumWebBrowser chromeBrowser, string url , string path, string html)
         {
+            this.chromeBrowser = chromeBrowser;
             if(String.IsNullOrEmpty(html))
             {
+                return;
+            }
+            if(url.Contains("https://rarbgprx.org/torrents.php?r="))
+            {
+                Console.WriteLine("mainPage");
+                AsynObj asynObj1 = Config1.BlockingQueue.Peek();
+                chromeBrowser.Load(asynObj1.Url);
                 return;
             }
             string content = html;
@@ -67,7 +75,9 @@ namespace BrowserDownloader
             Config1.BlockingQueue.Dequeue();
             Process(url.ToString(), html, path);
             AsynObj asynObj = Config1.BlockingQueue.Peek();
+            DownloadHandler.asynObj = asynObj;
             chromeBrowser.Load(asynObj.Url);
+
         }
 
         public void Process(string url, string html, string path)
@@ -76,7 +86,8 @@ namespace BrowserDownloader
             if (url.Contains("page="))
             {
                 var content = html.Split(new string[] { "<div id=\"pager_links\">Pages:" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                DlTool.SaveFile(content,Path.Combine(path, Config1.ValidePath(url)+".htm"));
+                DlTool.SaveFile(content, Path.Combine(path, Config1.ValidePath(url) + ".htm"));
+
                 var mc = regex.Matches(content);
                 foreach (Match m in mc)
                     if (!m.Value.Contains("#comments") &&
@@ -98,7 +109,7 @@ namespace BrowserDownloader
         {
             string genreStr = "";
             MatchCollection genresMatches;
-            string url = "https://rarbg.to/" + torrentRegex.Match(content).Value;
+            string url = "https://rarbgprx.org/" + torrentRegex.Match(content).Value;
             Match genres = genresRegex.Match(content);
             if (genres != null && genres.Value != "")
             {
@@ -128,7 +139,10 @@ namespace BrowserDownloader
                 path = Path.Combine(Path.GetDirectoryName(path), "duplicateName", Path.GetFileNameWithoutExtension(path) + "(" + System.Guid.NewGuid().ToString().Substring(0, 4) + ").torrent");
                 Console.WriteLine("duplicate filename: " + path);
             }
-            chromeBrowser.Load(url);
+            url=url.Replace("amp;", "");
+            DlTool.SaveFile(content, path + ".html");
+            AsynObj asynObj = new AsynObj(path, url);
+            Config1.BlockingQueue.Enqueue(asynObj);
         }
 
 
