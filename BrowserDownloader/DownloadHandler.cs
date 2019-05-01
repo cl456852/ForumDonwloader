@@ -43,11 +43,18 @@ namespace CefSharp.Example.Handlers
                 FileInfo[] fileInfos = TheFolder.GetFiles("*", SearchOption.AllDirectories);
                 foreach(FileInfo fileInfo in fileInfos)
                 {
+                    if(File.Exists(asynObj.Path))
+                    {
+                        asynObj.Path= Path.Combine( Path.GetDirectoryName(asynObj.Path), Path.GetFileNameWithoutExtension(asynObj.Path) + Guid.NewGuid()+Path.GetExtension(asynObj.Path));
+                        Console.WriteLine("duplicateFileName  " + asynObj.Path);
+                    }
                     File.Move(fileInfo.FullName, asynObj.Path);
                 }
                 Config1.BlockingQueue.Dequeue();
                 AsynObj asynObj1 = Config1.BlockingQueue.Peek();
                 DownloadHandler.asynObj = asynObj1;
+                Console.WriteLine(asynObj.Url);
+                Console.WriteLine(Config1.BlockingQueue.Count);
                 chromiumWebBrowser.Load(asynObj1.Url);
             }
         }

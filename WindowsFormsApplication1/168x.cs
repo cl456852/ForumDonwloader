@@ -27,7 +27,15 @@ namespace WindowsFormsApplication1
             Config1.BlockingQueue.Dequeue();
             if (webBrowser1.Url.ToString().Contains("thread"))
             {
-                string path = Config1.dictionary[webBrowser1.Url.ToString()].Path;
+                string path="";
+                if (Config1.dictionary.ContainsKey(webBrowser1.Url.ToString()))
+                {
+                     path = Config1.dictionary[webBrowser1.Url.ToString()].Path;
+                }
+                else
+                {
+                    path =Path.Combine( path1, Config1.getGUID() + ".html");
+                }
                 DlTool.SaveFile(gethtml, path);
 
             }

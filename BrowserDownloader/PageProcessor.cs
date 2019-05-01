@@ -5,6 +5,7 @@ using Framework.tool;
 using RarbgDownloader;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -21,6 +22,8 @@ namespace BrowserDownloader
 
         ChromiumWebBrowser chromeBrowser;
 
+        HashSet<string> hashSet = new HashSet<string>();
+
 
         public void NavigateHandle(ChromiumWebBrowser chromeBrowser, string url , string path, string html)
         {
@@ -29,7 +32,7 @@ namespace BrowserDownloader
             {
                 return;
             }
-            if(url.Contains("https://rarbgprx.org/torrents.php?r="))
+            if(url.Contains("https://rarbgprx.org/torrents.php?r=")||url== "https://rarbgprx.org/torrents.php"||url== "https://rarbgprx.org/"||url== "https://rarbgprx.org/torrents.php?category=2;4")
             {
                 Console.WriteLine("mainPage");
                 AsynObj asynObj1 = Config1.BlockingQueue.Peek();
@@ -45,7 +48,7 @@ namespace BrowserDownloader
             }
             if (content.Contains("detected abnormal "))
                 return;
-            if (content.Contains("We have too many requests from your ip in the past 24h"))
+            if (content.Contains("We have too many requests from your ip in the past 24h") || content.Contains("downloaded over 100 torrents in the past 24 hours"))
             {
                 Console.WriteLine("We have too many requests from your ip in the past 24h");
                 Config1.Flooding();
@@ -59,7 +62,7 @@ namespace BrowserDownloader
                 chromeBrowser.Load(asynObj1.Url);
                 return;
             }
-            if (html.Contains("torrents.php?r="))
+            if (url.Contains("torrents.php?r="))
             {
                 Console.WriteLine("first Redirecting");
                 chromeBrowser.Load("https://rarbg.to/torrents.php?category=1%3B4&page=" + path);
@@ -72,36 +75,60 @@ namespace BrowserDownloader
                 chromeBrowser.Load(asynObj1.Url);
                 return;
             }
-            Config1.BlockingQueue.Dequeue();
-            Process(url.ToString(), html, path);
-            AsynObj asynObj = Config1.BlockingQueue.Peek();
-            DownloadHandler.asynObj = asynObj;
-            chromeBrowser.Load(asynObj.Url);
+            
+            if (Process(url.ToString(), html, path))
+            {
+                Config1.BlockingQueue.Dequeue();
+                AsynObj asynObj = Config1.BlockingQueue.Peek();
+                DownloadHandler.asynObj = asynObj;
+                chromeBrowser.Load(asynObj.Url);
+            }
 
         }
 
-        public void Process(string url, string html, string path)
+        public bool Process(string url, string html, string path)
         {
-
-            if (url.Contains("page="))
+            try
             {
-                var content = html.Split(new string[] { "<div id=\"pager_links\">Pages:" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                DlTool.SaveFile(content, Path.Combine(path, Config1.ValidePath(url) + ".htm"));
 
-                var mc = regex.Matches(content);
-                foreach (Match m in mc)
-                    if (!m.Value.Contains("#comments") &&
-                        !DlConfig.storage.Contains(m.Value.Replace("href=\"/torrent/", "").Replace("\"", "")))
+
+                if (url.Contains("page="))
+                {
+                    if (!hashSet.Contains(url))
                     {
-                        AsynObj asynObj = new AsynObj();
-                        asynObj.Url = "https://rarbg.to" + m.Value.Replace("href=", "").Replace("\"", "");
-                        Config1.BlockingQueue.Enqueue(asynObj);
+                        hashSet.Add(url);
+
+                        var content = html.Split(new string[] { "<div id=\"pager_links\">Pages:" }, StringSplitOptions.RemoveEmptyEntries)[1];
+
+                        DlTool.SaveFile(content, Path.Combine(path, Config1.ValidePath(url) + ".htm"));
+
+                        var mc = regex.Matches(content);
+                        foreach (Match m in mc)
+                            if (!m.Value.Contains("#comments") &&
+                                !DlConfig.storage.Contains(m.Value.Replace("href=\"/torrent/", "").Replace("\"", "")))
+                            {
+                                AsynObj asynObj = new AsynObj();
+                                asynObj.Url = "https://rarbgprx.org" + m.Value.Replace("href=", "").Replace("\"", "");
+                                Config1.BlockingQueue.Enqueue(asynObj);
+                            }
                     }
+                    else
+                    {
+                        Console.WriteLine("duplicate List");
+                    }
+
+                }
+                else if (url.Contains("torrent"))
+                {
+                    Work(html, path);
+                }
             }
-            else if (url.Contains("torrent"))
+            catch(Exception e)
             {
-                Work(html,path);
+                Console.WriteLine("process Exception " + e.Message);
+                return false;
             }
+            return true;
         }
 
 
@@ -127,6 +154,9 @@ namespace BrowserDownloader
             {
                 path = Path.Combine(path, genreStr + "$$" + url.Substring(url.LastIndexOf('=') + 1)).Replace("%22", "");
                 //DlTool.downLoadFile(url, path, false, content, Config1.Cookie);
+                url = url.Replace("amp;", "");
+                AsynObj asynObj = new AsynObj(path, url);
+                Config1.BlockingQueue.Enqueue(asynObj);
             }
 
             else
@@ -141,8 +171,8 @@ namespace BrowserDownloader
             }
             url=url.Replace("amp;", "");
             DlTool.SaveFile(content, path + ".html");
-            AsynObj asynObj = new AsynObj(path, url);
-            Config1.BlockingQueue.Enqueue(asynObj);
+            
+            
         }
 
 

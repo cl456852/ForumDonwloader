@@ -108,9 +108,9 @@ namespace Framework.tool
         public static void Flooding()
         {
 
-            if (Monitor.TryEnter(ob))
-            {
-                mre.Reset();
+            //if (Monitor.TryEnter(ob))
+            //{
+            //    mre.Reset();
                 while (true)
                 {
                     if (RouterRedail(0))
@@ -121,9 +121,9 @@ namespace Framework.tool
                     if (RouterRedail(1))
                         break;
                 }
-                mre.Set();
-                Monitor.Exit(ob);
-            }
+            //    mre.Set();
+            //    Monitor.Exit(ob);
+            //}
 
         }
 
@@ -470,6 +470,15 @@ namespace Framework.tool
         public static string ValidePath(string path)
         {
             return path.Replace('/', '_').Replace(":", "^").Replace("?", "_").Replace('\\','_').Replace("|", "");
+        }
+
+
+        public static string getGUID()
+        {
+            System.Guid guid = new Guid();
+            guid = Guid.NewGuid();
+            string str = guid.ToString();
+            return str;
         }
     }
 }
