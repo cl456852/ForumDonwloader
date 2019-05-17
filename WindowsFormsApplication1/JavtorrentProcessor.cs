@@ -17,15 +17,20 @@ namespace WindowsFormsApplication1
         Regex listRegex = new Regex("<li>.*?</li>");
         Regex threadRegex = new Regex("<a href=\"/censored/.*?/\">|<a href=\"/iv/.*?/\">");
         Regex nameRegex=new Regex("<span class=\"base-t\">.*?</span>");
+        string listUrl;
+
+        public string ListUrl { get => listUrl; set => listUrl = value; }
+
         public void NavigateHandle(System.Windows.Forms.WebBrowser webBrowser1, System.Windows.Forms.WebBrowserDocumentCompletedEventArgs e, string path1)
         {
             System.IO.StreamReader getReader = new System.IO.StreamReader(webBrowser1.DocumentStream);
-            Console.WriteLine(e.Url);
+            Console.WriteLine("ListUrl:"+ listUrl);
+            Console.WriteLine("url:" + webBrowser1.Url);
             string gethtml = getReader.ReadToEnd();
             if (gethtml.Contains("500 Internal Privoxy Error"))
             {
                 Console.WriteLine("500 Internal Privoxy Error TRY AGAIN");
-                webBrowser1.Navigate(e.Url);
+                webBrowser1.Navigate(listUrl);
                 return;
             }
 
@@ -38,7 +43,8 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                DlTool.SaveFile(gethtml, Path.Combine(path1, DlTool.ReplaceUrl(e.Url.ToString()) + ".htm"));
+
+                DlTool.SaveFile(gethtml, Path.Combine(path1, DlTool.ReplaceUrl(ListUrl) + ".htm"));
                 gethtml = gethtml.Replace(" class=\"b5\"", "");
                 MatchCollection mc = listRegex.Matches(gethtml);
                 foreach(Match match in mc)
@@ -63,6 +69,7 @@ namespace WindowsFormsApplication1
                 }
             }
             AsynObj asynObj1 = Config1.BlockingQueue.Peek();
+            ListUrl = asynObj1.Url;
             webBrowser1.Navigate(asynObj1.Url);
         }
     }

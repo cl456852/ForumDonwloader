@@ -106,6 +106,9 @@ namespace WindowsFormsApplication1
         private void button4_Click(object sender, EventArgs e)
         {
             pageProcessor = new JavtorrentProcessor();
+            JavtorrentProcessor pageProcessor1 = (JavtorrentProcessor)pageProcessor;
+            string url = string.Format(textBox4.Text, Convert.ToInt32(textBox2.Text));
+            pageProcessor1.ListUrl = url;
             start();
         }
 
