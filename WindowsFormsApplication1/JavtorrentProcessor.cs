@@ -24,8 +24,8 @@ namespace WindowsFormsApplication1
         public void NavigateHandle(System.Windows.Forms.WebBrowser webBrowser1, System.Windows.Forms.WebBrowserDocumentCompletedEventArgs e, string path1)
         {
             System.IO.StreamReader getReader = new System.IO.StreamReader(webBrowser1.DocumentStream);
-            Console.WriteLine("ListUrl:"+ listUrl);
-            Console.WriteLine("url:" + webBrowser1.Url);
+            Console.WriteLine( listUrl);
+           // Console.WriteLine("url:" + webBrowser1.Url);
             string gethtml = getReader.ReadToEnd();
             if (gethtml.Contains("500 Internal Privoxy Error"))
             {
