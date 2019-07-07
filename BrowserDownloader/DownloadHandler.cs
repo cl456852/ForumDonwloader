@@ -36,27 +36,41 @@ namespace CefSharp.Example.Handlers
         public void OnDownloadUpdated(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
         {
             OnDownloadUpdatedFired?.Invoke(this, downloadItem);
-    
+
             if (downloadItem.IsComplete)
             {
-                DirectoryInfo TheFolder = new DirectoryInfo(downloadPath);
-                FileInfo[] fileInfos = TheFolder.GetFiles("*", SearchOption.AllDirectories);
-                foreach(FileInfo fileInfo in fileInfos)
+                try
                 {
-                    if(File.Exists(asynObj.Path))
+                    DirectoryInfo TheFolder = new DirectoryInfo(downloadPath);
+                    FileInfo[] fileInfos = TheFolder.GetFiles("*", SearchOption.AllDirectories);
+                    foreach (FileInfo fileInfo in fileInfos)
                     {
-                        asynObj.Path= Path.Combine( Path.GetDirectoryName(asynObj.Path), Path.GetFileNameWithoutExtension(asynObj.Path) + Guid.NewGuid()+Path.GetExtension(asynObj.Path));
-                        Console.WriteLine("duplicateFileName  " + asynObj.Path);
+                        if (File.Exists(asynObj.Path))
+                        {
+                            asynObj.Path = Path.Combine(Path.GetDirectoryName(asynObj.Path), Path.GetFileNameWithoutExtension(asynObj.Path) + Guid.NewGuid() + Path.GetExtension(asynObj.Path));
+                            Console.WriteLine("duplicateFileName  " + asynObj.Path);
+                        }
+                        try
+                        {
+                            File.Move(fileInfo.FullName, asynObj.Path);
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine("移动文件异常", e);
+                        }
                     }
-                    File.Move(fileInfo.FullName, asynObj.Path);
+                    Config1.BlockingQueue.Dequeue();
+                    AsynObj asynObj1 = Config1.BlockingQueue.Peek();
+                    DownloadHandler.asynObj = asynObj1;
+                    Console.WriteLine(asynObj.Url);
+                    Console.WriteLine(Config1.BlockingQueue.Count);
+                    chromiumWebBrowser.Load(asynObj1.Url);
                 }
-                Config1.BlockingQueue.Dequeue();
-                AsynObj asynObj1 = Config1.BlockingQueue.Peek();
-                DownloadHandler.asynObj = asynObj1;
-                Console.WriteLine(asynObj.Url);
-                Console.WriteLine(Config1.BlockingQueue.Count);
-                chromiumWebBrowser.Load(asynObj1.Url);
-            }
+                catch(Exception e)
+                {
+                    Console.WriteLine("OnDownloadUpdated error "+e.Message);
+                }
+            }   
         }
 
 

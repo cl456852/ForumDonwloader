@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
@@ -82,6 +83,9 @@ namespace BrowserDownloader
             //chromeBrowser.Load("https://rarbgprx.org/download.php?id=n2yfuli&h=693&f=Nubiles.19.04.11.Rachel.Adjani.Deeper.XXX.1080p.MP4-KTR-[rarbg.to].torrent");
             pageProcessor = new PageProcessor();
             start();
+            Thread th = new Thread(CheckHang);
+            th.Start();
+
         }
 
         private void start()
@@ -115,6 +119,32 @@ namespace BrowserDownloader
             //}
             //AsynObj asynObj1 = Config1.BlockingQueue.Peek();
             //chromeBrowser.Load(asynObj1.Url);
+        }
+
+        static string url = "";
+
+        void CheckHang()
+        {
+            while (true)
+            {
+                AsynObj asynObj = (AsynObj)Config1.BlockingQueue.Peek();
+                if (asynObj != null)
+                {
+                    string queueUrl = asynObj.Url;
+                    if (url == queueUrl)
+                    {
+
+                        chromeBrowser.Stop();
+                        chromeBrowser.Load(url);
+                        Console.WriteLine("reloaded " + url);
+
+
+                    }
+                    url = queueUrl;
+                    Thread.Sleep(40000);
+                }
+            }
+
         }
     }
 }

@@ -47,7 +47,7 @@ namespace WindowsFormsApplication1
                     string[] threads = gethtml.Split(new string[] { "新窗口打开" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string thread in threads)
                     {
-                        if (thread.Contains("亚洲有码原创"))
+                        if (thread.Contains("<!DOCTYPE html PUBLIC"))
                             continue;
 
                         string path = Path.Combine(path1, DlTool.ReplaceUrl(nameRegex.Match(thread).Value.Replace("s xst\">", "").Replace("</a>",""))) + ".htm";

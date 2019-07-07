@@ -27,6 +27,7 @@ namespace BrowserDownloader
 
         public void NavigateHandle(ChromiumWebBrowser chromeBrowser, string url , string path, string html)
         {
+            Console.WriteLine(url);
             this.chromeBrowser = chromeBrowser;
             if(String.IsNullOrEmpty(html))
             {
