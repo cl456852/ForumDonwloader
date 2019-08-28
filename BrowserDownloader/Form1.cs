@@ -146,5 +146,11 @@ namespace BrowserDownloader
             }
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            pageProcessor = new _52ivPageProcessor();
+            start();
+        }
     }
 }
