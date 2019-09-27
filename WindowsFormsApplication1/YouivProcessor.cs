@@ -25,10 +25,15 @@ namespace WindowsFormsApplication1
                 webBrowser1.Navigate(e.Url);
                 return;
             }
-            if (!e.Url.ToString().Contains("youiv.tv/youiv") && !e.Url.ToString().Contains("youiv.tv/u15-279"))
+            if (!e.Url.ToString().Contains("youiv.co/u15-279") &&!e.Url.ToString().Contains("youiv.co/youiv-"))
             {
                 Console.WriteLine("Please wait while we try to verify your browser");
                 //webBrowser1.Navigate(url + i);
+                return;
+            }
+            if(gethtml.Contains("Username_帐号:"))
+            {
+                Console.WriteLine("Username_帐号:");
                 return;
             }
 
@@ -60,7 +65,7 @@ namespace WindowsFormsApplication1
                 MatchCollection mc = theadRegex.Matches(gethtml);
                 foreach(Match match in mc)
                 {
-                    string url ="https://youiv.tv/"+ match.Value.Split(new string[] { "<a href=\"", "\"" }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    string url = "https://www.youiv.co/" + match.Value.Split(new string[] { "<a href=\"", "\"" }, StringSplitOptions.RemoveEmptyEntries)[0];
                     string name = match.Value.Split(new string[] { "title=\"", "\" class=\"z\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
                     
 

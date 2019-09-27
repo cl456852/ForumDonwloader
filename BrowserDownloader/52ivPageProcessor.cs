@@ -29,8 +29,11 @@ namespace BrowserDownloader
                 Console.WriteLine("login page");
                 return;
             }
-            Config1.BlockingQueue.Dequeue();
-   
+            if(html== "<html><head></head><body></body></html>")
+            {
+                Console.WriteLine("<html><head></head><body></body></html> error  " + url);
+                return;
+            }
             if (url.ToString().Contains("thread") )
             {
                 string path = Config1.dictionary[url.ToString()].Path;
@@ -63,6 +66,7 @@ namespace BrowserDownloader
                 }
 
             }
+            Config1.BlockingQueue.Dequeue();
             AsynObj asynObj1 = Config1.BlockingQueue.Peek();
             webBrowser1.Load(asynObj1.Url);
         }
