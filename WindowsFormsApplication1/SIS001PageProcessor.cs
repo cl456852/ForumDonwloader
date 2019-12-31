@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1
             System.IO.StreamReader getReader = new System.IO.StreamReader(webBrowser1.DocumentStream, System.Text.Encoding.GetEncoding("gb2312"));
             string gethtml = getReader.ReadToEnd();
 
-            if (gethtml.Contains("500 Internal Privoxy Error"))
+            if (gethtml.Contains("500 Internal Privoxy Error")||gethtml.Contains("<title>无法访问此页</title>")||gethtml.Contains("<title>代理服务器没有响应</title>")||gethtml.Contains("<BODY></BODY>")||gethtml.Contains("Can not connect to MySQL server"))
             {
                 Console.WriteLine("500 Internal Privoxy Error TRY AGAIN");
                 webBrowser1.Navigate(e.Url);

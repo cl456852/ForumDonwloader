@@ -46,7 +46,7 @@
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.webBrowser1.Margin = new System.Windows.Forms.Padding(6);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(40, 40);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(2700, 872);
@@ -57,7 +57,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(1034, 8);
-            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button2.Margin = new System.Windows.Forms.Padding(6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 46);
             this.button2.TabIndex = 2;
@@ -68,16 +68,16 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(2192, 16);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(6);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(196, 35);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "e:\\test6";
+            this.textBox1.Text = "d:\\test6";
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(2424, 8);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(6);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(96, 35);
             this.textBox2.TabIndex = 4;
@@ -86,7 +86,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(2536, 12);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(6);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(90, 35);
             this.textBox3.TabIndex = 5;
@@ -95,7 +95,7 @@
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(42, 8);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(6);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(952, 35);
             this.textBox4.TabIndex = 6;
@@ -104,7 +104,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(1224, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 54);
             this.button1.TabIndex = 7;
@@ -115,7 +115,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(1386, 12);
-            this.button3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button3.Margin = new System.Windows.Forms.Padding(6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(150, 46);
             this.button3.TabIndex = 8;
@@ -126,7 +126,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(1598, 6);
-            this.button4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button4.Margin = new System.Windows.Forms.Padding(6);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(150, 46);
             this.button4.TabIndex = 9;
@@ -137,7 +137,7 @@
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(1762, 16);
-            this.button5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button5.Margin = new System.Windows.Forms.Padding(6);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(150, 46);
             this.button5.TabIndex = 10;
@@ -148,7 +148,7 @@
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(1972, 12);
-            this.button6.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button6.Margin = new System.Windows.Forms.Padding(6);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(150, 46);
             this.button6.TabIndex = 11;
@@ -159,7 +159,7 @@
             // button7
             // 
             this.button7.Location = new System.Drawing.Point(1972, 70);
-            this.button7.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button7.Margin = new System.Windows.Forms.Padding(6);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(150, 46);
             this.button7.TabIndex = 12;
@@ -184,7 +184,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.webBrowser1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -83,8 +83,8 @@ namespace BrowserDownloader
             //chromeBrowser.Load("https://rarbgprx.org/download.php?id=n2yfuli&h=693&f=Nubiles.19.04.11.Rachel.Adjani.Deeper.XXX.1080p.MP4-KTR-[rarbg.to].torrent");
             pageProcessor = new PageProcessor();
             start();
-            Thread th = new Thread(CheckHang);
-            th.Start();
+            //Thread th = new Thread(CheckHang);
+            //th.Start();
 
         }
 
@@ -150,6 +150,12 @@ namespace BrowserDownloader
         private void button3_Click(object sender, EventArgs e)
         {
             pageProcessor = new _52ivPageProcessor();
+            start();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            pageProcessor = new _456k();
             start();
         }
     }

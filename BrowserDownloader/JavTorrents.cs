@@ -13,7 +13,7 @@ namespace BrowserDownloader
 {
     class JavTorrents : IPageProcessor
     {
-        Regex listRegex = new Regex("<li>.*?</li>");
+        Regex listRegex = new Regex("<div>.*?</div>");
         Regex threadRegex = new Regex("<a href=\"/censored/.*?/\">|<a href=\"/iv/.*?/\">");
         Regex nameRegex = new Regex("<span class=\"base-t\">.*?</span>");
         string listUrl;

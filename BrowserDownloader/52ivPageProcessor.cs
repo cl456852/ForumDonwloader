@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CefSharp.WinForms;
 using Framework.tool;
-
+//https://www.52iv.tv/forum.php?mod=forumdisplay&fid=136&forumdefstyle=yes&page={0}
 namespace BrowserDownloader
 {
     class _52ivPageProcessor : IPageProcessor
@@ -43,7 +43,6 @@ namespace BrowserDownloader
             {
                 DlTool.SaveFile(gethtml, Path.Combine(path1, DlTool.ReplaceUrl(url) + ".htm"));
                 string[] threadList= gethtml.Split(new string[] { "normalthread_" },StringSplitOptions.None);
-                MatchCollection mc = listRegex.Matches(gethtml);
                 foreach (string threadString in threadList)
                 {
                     if(threadString.Contains("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1"))

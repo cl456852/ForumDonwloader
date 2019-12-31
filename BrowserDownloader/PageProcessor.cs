@@ -33,7 +33,7 @@ namespace BrowserDownloader
             {
                 return;
             }
-            if(url.Contains("https://rarbgprx.org/torrents.php?r=")||url== "https://rarbgprx.org/torrents.php"||url== "https://rarbgprx.org/"||url== "https://rarbgprx.org/torrents.php?category=2;4")
+            if(url.Contains("https://rarbgmirror.org/torrents.php?r=")||url== "https://rarbgmirror.org/torrents.php"||url== "https://rarbgmirror.org/"||url== "https://rarbgmirror.org/torrents.php?category=2;4"||html.Contains("Too Many Requests")||url.ToString()=="")
             {
                 Console.WriteLine("mainPage");
                 AsynObj asynObj1 = Config1.BlockingQueue.Peek();
@@ -41,7 +41,7 @@ namespace BrowserDownloader
                 return;
             }
             string content = html;
-            if (content.Contains("Please wait while we try to verify your browser"))
+            if (content.Contains("Please wait while we try to verify your browser")||content.Contains("This process is automatic. Your browser will redirect to your requested content shortly"))
             {
                 Console.WriteLine("Please wait while we try to verify your browser");
                 //chromeBrowser.Navigate(url + i);
@@ -66,7 +66,7 @@ namespace BrowserDownloader
             if (url.Contains("torrents.php?r="))
             {
                 Console.WriteLine("first Redirecting");
-                chromeBrowser.Load("https://rarbg.to/torrents.php?category=1%3B4&page=" + path);
+                chromeBrowser.Load("http://rarbgmirror.org/torrents.php?category=1%3B4&page=" + path);
                 return;
             }
             if (content.Contains("无法显示此页"))
@@ -109,7 +109,7 @@ namespace BrowserDownloader
                                 !DlConfig.storage.Contains(m.Value.Replace("href=\"/torrent/", "").Replace("\"", "")))
                             {
                                 AsynObj asynObj = new AsynObj();
-                                asynObj.Url = "https://rarbgprx.org" + m.Value.Replace("href=", "").Replace("\"", "");
+                                asynObj.Url = "http://rarbgmirror.org" + m.Value.Replace("href=", "").Replace("\"", "");
                                 Config1.BlockingQueue.Enqueue(asynObj);
                             }
                     }
@@ -137,7 +137,7 @@ namespace BrowserDownloader
         {
             string genreStr = "";
             MatchCollection genresMatches;
-            string url = "https://rarbgprx.org/" + torrentRegex.Match(content).Value;
+            string url = "https://rarbgmirror.org/" + torrentRegex.Match(content).Value;
             Match genres = genresRegex.Match(content);
             if (genres != null && genres.Value != "")
             {
