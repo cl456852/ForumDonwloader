@@ -97,7 +97,7 @@ namespace BrowserDownloader
                 {
                     if (!hashSet.Contains(url))
                     {
-                        hashSet.Add(url);
+            
 
                         var content = html.Split(new string[] { "<div id=\"pager_links\">Pages:" }, StringSplitOptions.RemoveEmptyEntries)[1];
 
@@ -112,6 +112,7 @@ namespace BrowserDownloader
                                 asynObj.Url = "http://rarbgmirror.org" + m.Value.Replace("href=", "").Replace("\"", "");
                                 Config1.BlockingQueue.Enqueue(asynObj);
                             }
+                        hashSet.Add(url);
                     }
                     else
                     {
@@ -194,6 +195,25 @@ namespace BrowserDownloader
                     return true;
             return false;
         }
+
+        //private bool check1(string name)
+        //{
+        //    string[] okname = DlConfig.demo4["okname"].ToString().Split(',');
+        //    foreach (string s in okname)
+        //        if (name.Contains(s.ToLower()))
+        //        {
+        //            Object o = DlConfig.demo4[s.ToLower()];
+        //            if (o != null)
+        //            {
+        //                string token = o.ToString();
+        //                if (name.Contains(token))
+        //                    return true;
+        //                return false;
+        //            }
+        //            return true;
+        //        }
+        //    return false;
+        //}
 
         private int Check(string genreStr)
         {

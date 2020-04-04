@@ -58,6 +58,7 @@ namespace CefSharp.Example.Handlers
                         {
                             Console.WriteLine("移动文件异常", e);
                         }
+
                     }
                     Config1.BlockingQueue.Dequeue();
                     AsynObj asynObj1 = Config1.BlockingQueue.Peek();

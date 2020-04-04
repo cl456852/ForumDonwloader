@@ -32,6 +32,8 @@ namespace BrowserDownloader
             if(html== "<html><head></head><body></body></html>")
             {
                 Console.WriteLine("<html><head></head><body></body></html> error  " + url);
+                AsynObj asynObj2 = Config1.BlockingQueue.Peek();
+                webBrowser1.Load(asynObj2.Url);
                 return;
             }
             if (url.ToString().Contains("thread") )
