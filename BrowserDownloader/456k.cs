@@ -13,10 +13,17 @@ namespace BrowserDownloader
     class _456k : IPageProcessor
     {
         Regex listRegex = new Regex("href=\"thread.*? onclick=");
-        Regex nameRegex = new Regex("class=\"s xst\">.*?</a>");
+        Regex nameRegex = new Regex("deanforumtitname\">.*?</a>");
         public void NavigateHandle(ChromiumWebBrowser webBrowser1, string url, string path1, string html)
         {
             Console.WriteLine(url);
+            if(html.Contains("The server is temporarily unable"))
+            {
+                Console.WriteLine("The server is temporarily unable");
+                AsynObj asynObj2 = Config1.BlockingQueue.Peek();
+                webBrowser1.Load(asynObj2.Url);
+                return;
+            }
             if (url.ToString().Contains("thread"))
             {
                 string path = Config1.dictionary[url.ToString()].Path;
@@ -40,7 +47,7 @@ namespace BrowserDownloader
                         list = list.Split('\"')[1];
                         string threadUrl = "http://www.1080fhd.com/" + list;
                         string list1 = list.Split('-')[1];
-                        string name = nameRegex.Match(threadString).Value.Replace("class=\"s xst\">", "").Replace("</a>", "").Replace("/", "#");
+                        string name = nameRegex.Match(threadString).Value.Replace("deanforumtitname\">", "").Replace("</a>", "").Replace("/", "#");
                         string path = Path.Combine(path1, DlTool.ReplaceUrl(name) + ".htm");
                         AsynObj o = new AsynObj();
                         o.Url = threadUrl;
