@@ -21,7 +21,7 @@ namespace WindowsFormsApplication1
         Regex regex = new Regex("thread-.*</a></span>");
         public void NavigateHandle(System.Windows.Forms.WebBrowser webBrowser1, WebBrowserDocumentCompletedEventArgs e, string path1)
         {
-            System.IO.StreamReader getReader = new System.IO.StreamReader(webBrowser1.DocumentStream, System.Text.Encoding.GetEncoding("gb2312"));
+            System.IO.StreamReader getReader = new System.IO.StreamReader(webBrowser1.DocumentStream);
             string gethtml = getReader.ReadToEnd();
 
             if (gethtml.Contains("500 Internal Privoxy Error")||gethtml.Contains("<title>无法访问此页</title>")||gethtml.Contains("<title>代理服务器没有响应</title>")||gethtml.Contains("<BODY></BODY>")||gethtml.Contains("Can not connect to MySQL server"))
@@ -42,23 +42,13 @@ namespace WindowsFormsApplication1
                 try
                 {
                     DlTool.SaveFile(gethtml,Path.Combine(path1, DlTool.ReplaceUrl(e.Url.ToString())+".htm"));
-                    string[] threads1;
-                    if (gethtml.Contains("版块主题"))
-                    {
-                        threads1 = gethtml.Split(new string[] { "版块主题" }, StringSplitOptions.RemoveEmptyEntries);
-                    }
-                    else
-                    {
-                        threads1 = gethtml.Split(new string[] { "推荐主题" }, StringSplitOptions.RemoveEmptyEntries);
-
-                    }
-                    string[] threads = threads1[1].Split(new string[] { "normalthread_", "pages_btns" }, StringSplitOptions.RemoveEmptyEntries);
+                    string thread1=gethtml.Split(new string[] { "pages_btns" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    string[] threads = thread1.Split(new string[] { "normalthread_" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string thread in threads)
                     {
                         try
                         {
-                            if (thread.Contains("新窗口打开"))
-                            {
+                           
                                 string path;
                                 if (thread.Contains("color:"))
                                 {
@@ -92,7 +82,7 @@ namespace WindowsFormsApplication1
                                 o.Path = path;
                                 Config1.dictionary.Add(link, o);
                                 Config1.BlockingQueue.Enqueue(o);
-                            }
+                            
 
                         } 
                         catch(Exception e2)

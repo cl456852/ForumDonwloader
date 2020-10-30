@@ -48,7 +48,7 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(1284, 436);
+            this.webBrowser1.Size = new System.Drawing.Size(962, 436);
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
@@ -93,12 +93,12 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(478, 21);
             this.textBox4.TabIndex = 6;
-            this.textBox4.Text = "http://sis001.com/forum/forumdisplay.php?fid=230&page=3&styleid=24";
+            this.textBox4.Text = "http://sis001.com/forum/forumdisplay.php?fid=230&page={0}&styleid=24";
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(612, 2);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(59, 27);
             this.button1.TabIndex = 7;
@@ -160,7 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 436);
+            this.ClientSize = new System.Drawing.Size(962, 436);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);

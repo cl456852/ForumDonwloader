@@ -79,6 +79,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IPageProcessor.cs" />
+    <Compile Include="JavDB.cs" />
     <Compile Include="JavTorrents.cs" />
     <Compile Include="PageProcessor.cs" />
     <Compile Include="Program.cs" />
