@@ -163,7 +163,7 @@ namespace Framework.tool
             CookieContainer cc = new CookieContainer();
             string Cookiesstr = string.Empty;
 
-            string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=QVNVUzoxMTExMTFh";
+            string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=Y2w0NTY4NTI6aWFtamFjaydzY29sb24=";
             string LoginUrl = "http://192.168.50.1/login.cgi";
             request = (HttpWebRequest)WebRequest.Create(LoginUrl);//实例化web访问类   
             request.Method = "POST";//数据提交方式为POST   
@@ -415,7 +415,7 @@ namespace Framework.tool
             CookieContainer cc = new CookieContainer();
             string Cookiesstr = string.Empty;
 
-            string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=QVNVUzoxMTExMTFh";
+            string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=Y2w0NTY4NTI6aWFtamFjaydzY29sb24=";
             string LoginUrl = "http://192.168.50.1/login.cgi";
             request = (HttpWebRequest)WebRequest.Create(LoginUrl);//实例化web访问类   
             request.Method = "POST";//数据提交方式为POST   

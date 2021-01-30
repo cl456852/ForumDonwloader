@@ -12,7 +12,7 @@ namespace BrowserDownloader
 {
     class _52ivPageProcessor : IPageProcessor
     {
-        Regex nameRegex = new Regex("class=\"xst\">.*?</a>");
+        Regex nameRegex = new Regex("class=\"s xst\">.*?</a>");
         Regex listRegex = new Regex("href=\"thread.*? onclick=");
 
         public void NavigateHandle(ChromiumWebBrowser webBrowser1, string url, string path1, string html)
@@ -47,21 +47,23 @@ namespace BrowserDownloader
                 string[] threadList= gethtml.Split(new string[] { "normalthread_" },StringSplitOptions.None);
                 foreach (string threadString in threadList)
                 {
-                    if(threadString.Contains("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1"))
+                    if(threadString.Contains("有新回复 - 新窗口打开")||threadString.Contains("<!DOCTYPE html PUBLIC"))
                     {
                         continue;
                     }
                     string list = listRegex.Match(threadString).Value;
                     list = list.Split('\"')[1];
-                    string threadUrl = "https://www.52iv.tv/" + list;
-                    string name = nameRegex.Match(threadString).Value.Replace("class=\"xst\">", "").Replace("</a>", "").Replace("/","#");
+                    string threadUrl = "https://www.52iv.click/" + list;
+                    string name = nameRegex.Match(threadString).Value.Replace("class=\"s xst\">", "").Replace("</a>", "").Replace("/","#");
                     string path = Path.Combine(path1, DlTool.ReplaceUrl(name) + ".htm");
                     AsynObj o = new AsynObj();
                     o.Url = threadUrl;
                     o.Path = path;
                     if (!Config1.dictionary.ContainsKey(threadUrl))
                     {
+                        string s = "https://www.52iv.click/forum.php?mod=viewthread&tid=" + threadUrl.Split( new string[] { "-" },StringSplitOptions.None)[1];
                         Config1.dictionary.Add(threadUrl, o);
+                        Config1.dictionary.Add(s, o);
                     }
                     Config1.BlockingQueue.Enqueue(o);
                 }

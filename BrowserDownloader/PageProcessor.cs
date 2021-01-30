@@ -33,7 +33,7 @@ namespace BrowserDownloader
             {
                 return;
             }
-            if(url.Contains("https://rarbgmirror.org/torrents.php?r=")||url== "https://rarbgmirror.org/torrents.php"||url== "https://rarbgmirror.org/"||url== "https://rarbgmirror.org/torrents.php?category=2;4"||html.Contains("Too Many Requests")||url.ToString()=="")
+            if(url.Contains("https://rarbgmirror.org/torrents.php?r=")||url== "https://rarbgmirror.org/torrents.php"||url== "https://rarbgmirror.org/"||url== "https://rarbgmirror.org/torrents.php?category=2;4"||html.Contains("Too Many Requests")||url.ToString()==""||html.Contains("Web server is returning an unknown error"))
             {
                 Console.WriteLine("mainPage");
                 AsynObj asynObj1 = Config1.BlockingQueue.Peek();
@@ -41,7 +41,7 @@ namespace BrowserDownloader
                 return;
             }
             string content = html;
-            if (content.Contains("Please wait while we try to verify your browser")||content.Contains("This process is automatic. Your browser will redirect to your requested content shortly"))
+            if (content.Contains("Please wait while we try to verify your browser")||content.Contains("This process is automatic. Your browser will redirect to your requested content shortly")||content.Contains("Please stand by, while we are checking your browser"))
             {
                 Console.WriteLine("Please wait while we try to verify your browser");
                 //chromeBrowser.Navigate(url + i);

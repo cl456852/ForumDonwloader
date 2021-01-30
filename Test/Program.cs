@@ -184,7 +184,7 @@ namespace Framework.tool
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://192.168.1.1:80/login.cgi");
             request.Method = "POST";
             ASCIIEncoding encoding = new ASCIIEncoding();
-            byte[] b = encoding.GetBytes("group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=YWRtaW46YWRtaW4%3D");
+            byte[] b = encoding.GetBytes("group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=Y2w0NTY4NTI6aWFtamFjaydzY29sb24=");
             request.Host = "192.168.1.1";
             request.Referer = "http://192.168.1.1/Main_Login.asp";
 
@@ -235,7 +235,7 @@ namespace Framework.tool
             CookieContainer cc = new CookieContainer();
             string Cookiesstr = string.Empty;
 
-            string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=QVNVUzoxMTExMTFh";
+            string postData = "group_id=&action_mode=&action_script=&action_wait=5&current_page=Main_Login.asp&next_page=index.asp&login_authorization=Y2w0NTY4NTI6aWFtamFjaydzY29sb24=";
             string LoginUrl = "http://router.asus.com/login.cgi";
             request = (HttpWebRequest)WebRequest.Create(LoginUrl);//实例化web访问类   
             request.Method = "POST";//数据提交方式为POST   
